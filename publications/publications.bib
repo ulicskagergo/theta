@@ -263,6 +263,22 @@
     abstract   = {Formal verification techniques can check the correctness of systems in a mathematically precise way. Counterexample-Guided Abstraction Refinement (CEGAR) is an automatic algorithm that reduces the complexity of systems by constructing and refining abstractions. CEGAR is a generic approach, having many variants and strategies developed over the years. However, as the variants become more and more advanced, one may not be sure whether the performance of a strategy can be attributed to the strategy itself or to other, unintentional factors. In this paper we perform an experiment by evaluating the performance of different strategies while randomizing certain external factors such as the search strategy and variable naming. We show that randomization introduces a great variation in the output metrics, and that in several cases this might even influence whether the algorithm successfully terminates.},
 }
 
+@inproceedings{minisy2018fr,
+  author     = {Farkas, Rebeka and Bergmann, G\'abor},
+  title      = {Towards Reliable Benchmarks of Timed Automata},
+  year       = {2018},
+  booktitle  = {Proceedings of the 25th PhD Mini-Symposium},
+  location   = {Budapest, Hungary},
+  publisher  = {Budapest University of Technology and Economics, Department of Measurement and Information Systems},
+  editor     = {Pataki, B\'{e}la},
+  pages      = {20--23},
+
+  type       = {Local event},
+  url_pdf    = {minisy2018fr.pdf},
+  abstract   = {The verification of the time-dependent behavior of safety-critical systems is important, as design problems often arise from complex timing conditions. One of the most common formalisms for modeling timed systems is the timed automaton, which introduces clock variables to represent the elapse of time. Various tools and algorithms have been developed for the verification of timed automata. However, it is hard to decide which one to use for a given problem as no exhaustive benchmark of their effectiveness and efficiency can be found in the literature. Moreover, there does not exist a public set of models that can be used as an appropriate benchmark suite. In our work we have collected publicly available timed automaton models and industrial case studies and we used them to compare the efficiency of the algorithms implemented in the Theta model checker. In this paper, we present our preliminary benchmark suite, and demonstrate the results of the performed measurements.},
+
+}
+
 @inproceedings{avocs2018,
     author     = {Farkas, Rebeka and T\'oth, Tam\'as and Hajdu, \'{A}kos and V\"or\"os, Andr\'as},
     title      = {Backward reachability analysis for timed automata with data variables},
