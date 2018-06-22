@@ -24,7 +24,7 @@
     note     = {Master's Thesis, Budapest University of Technology and Economics},
     year     = {2015},
     type     = {Thesis},
-    
+
     url_pdf  = {hajduaMsc2015.pdf},
     url_link = {http://diplomaterv.vik.bme.hu/en/Theses/CEGARalapu-modellellenorzes-vizsgalata},
     abstract = {Formal verification is becoming more prevalent, especially in the development of safety-critical systems, where mathematically precise proofs are required to ensure suitability and faultlessness. However, a major drawback of formal methods is their high computational complexity. This also holds for model checking, one of the most prevalent formal verification techniques. Model checking aims to automatically verify a system by exhaustively (explicitly or symbolically) analyzing its possible behaviors. However, relatively small systems can have an unmanageably large or even infinite number of behaviors. There are several existing approaches to handle this problem, but as the complexity of the models increases, new and more efficient algorithms are required. A widely used technique to overcome the former problem is Counterexample-Guided Abstraction Refinement (CEGAR). CEGAR-based approaches work on an abstraction of the model, which is computationally easier to handle. A common abstraction scheme is to over-approximate the set of behaviors by systematically relaxing constraints in the model. However, the result of the algorithm may be imprecise due to the coarseness of the abstraction. In such cases, the abstraction has to be refined. CEGAR-based approaches usually start with a coarse abstraction to minimize computational cost and apply refinement until a precise result is obtained. In my work I examine the literature and the theoretical background of model checking of transition systems using CEGAR-based approaches. I present first order and temporal logic for formalizing systems and requirements, and I analyze two CEGAR algorithms based on different subtypes of over-approximation. I also examine a handful of related techniques that can make CEGAR more efficient, including SAT/SMT solving, interpolation and lazy abstraction. I also propose a new algorithm that combines the advantages of these approaches and techniques. I have implemented these algorithms in order to evaluate and compare their performance. Analysis of the measurement results highlights the advantages and shortcomings of the algorithms for several types of models.},
@@ -40,7 +40,7 @@
 	isbn      = {978-963-313-220-3},
 	publisher = {Budapest University of Technology and Economics, Department of Measurement and Information Systems},
 
-    type      = {Local event},    
+    type      = {Local event},
     url_pdf   = {minisy2016tt.pdf},
     url_link  = {https://www.mit.bme.hu/eng/system/files/oktatas/9860/23Minisymp_proceedings.pdf},
     abstract  = {The behavior of practical safety critical systems usually combines real-time behavior with structured data flow. To ensure correctness of such systems, both aspects have to be modeled and formally verified. Time related behavior can be efficiently modeled and analyzed in terms of timed automata. At the same time, program verification techniques like abstract interpretation and software model checking can efficiently handle data flow. In this paper, we describe a simple formalism that is able to model both aspects of such systems and enables the combination of formal verification techniques for real-time systems and software. We also outline a straightforward method for building efficient verifiers for the formalism based on the combination of analyses for the respective aspects.},
@@ -183,7 +183,7 @@
     publisher  = {Open Publishing Association},
     pages      = {31--45},
     doi        = {10.4204/EPTCS.245.3},
-    
+
     type       = {Workshop},
     url_pdf    = {fesca2017.pdf},
     url_link   = {http://eptcs.web.cse.unsw.edu.au/paper.cgi?FESCA2017.3},
@@ -203,7 +203,7 @@
     publisher  = {Open Publishing Association},
     pages      = {75--91},
     doi        = {10.4204/EPTCS.253.7},
-    
+
     type       = {Workshop},
     url_pdf    = {vpt2017.pdf},
     url_link   = {http://eptcs.web.cse.unsw.edu.au/paper.cgi?VPT2017.7},
@@ -238,8 +238,8 @@
     editor     = {Stewart, Daryl and Weissenbacher, Georg},
     pages      = {176--179},
     doi        = {10.23919/FMCAD.2017.8102257},
-    
-    
+
+
     type       = {Conference},
     url_pdf    = {fmcad2017.pdf},
     url_link   = {http://www.cs.utexas.edu/users/hunt/FMCAD/FMCAD17/proceedings/},
@@ -255,7 +255,7 @@
     location   = {Budapest, Hungary},
     publisher  = {Budapest University of Technology and Economics, Department of Measurement and Information Systems},
     editor     = {Pataki, B\'{e}la},
-    pages      = {32--35},  
+    pages      = {32--35},
 
     type       = {Local event},
     url_pdf    = {minisy2018.pdf},
@@ -284,25 +284,26 @@
     title      = {Backward reachability analysis for timed automata with data variables},
     year       = {2018},
     booktitle  = {Proceedings of the 18th International Workshop on Automated Verification of Critical Systems},
-    
+
     note       = {(Accepted.)},
-    
+
     type       = {Workshop},
 }
 
-@incollection{spin2018tt,
-    author = {T{\'o}th, Tam{\'a}s and Majzik, Istv{\'a}n},
-    title = {Lazy Reachability Checking for Timed Automata with Discrete Variables},
-    year = {2018},
-    booktitle = {Model Checking Software, 25th International Symposium, SPIN 2018},
-    location = {Málaga, Spain},
-    publisher = {Springer},
-    editor = {del Mar Gallardo, Maria and Merino, Pedro},
-    series = {Lecture Notes in Computer Science},
-    volume = {10869},
-    pages = {235-254},
-    doi = {10.1007/978-3-319-94111-0_14},
+@incollection{spin2018,
+    author     = {T{\'o}th, Tam{\'a}s and Majzik, Istv{\'a}n},
+    title      = {Lazy Reachability Checking for Timed Automata with Discrete Variables},
+    year       = {2018},
+    booktitle  = {Model Checking Software. SPIN 2018},
+    location   = {Málaga, Spain},
+    publisher  = {Springer},
+    editor     = {del Mar Gallardo, Maria and Merino, Pedro},
+    series     = {Lecture Notes in Computer Science},
+    volume     = {10869},
+    pages      = {235-254},
+    doi        = {10.1007/978-3-319-94111-0_14},
 
-    type = {Conference},
-    abstract = {Systems and software with time dependent behavior are often formally specified using timed automata. For practical real-time systems, these specifications typically contain discrete data variables with nontrivial data flow besides real-valued clock variables. In this paper, we propose a lazy abstraction method for the location reachability problem of timed automata that can be used to efficiently control the visibility of discrete variables occurring in such specifications, this way alleviating state space explosion. The proposed abstraction refinement strategy is based on interpolation for variable assignments and symbolic backward search. We combine in a single algorithm our abstraction method with known efficient lazy abstraction algorithms for the handling of clock variables. Our experiments show that the proposed method performs favorably when compared to other lazy methods, and is suitable to significantly reduce the number of states generated during state space exploration.}
+    type       = {Conference},
+    url_pdf    = {spin2018.pdf},
+    abstract   = {Systems and software with time dependent behavior are often formally specified using timed automata. For practical real-time systems, these specifications typically contain discrete data variables with nontrivial data flow besides real-valued clock variables. In this paper, we propose a lazy abstraction method for the location reachability problem of timed automata that can be used to efficiently control the visibility of discrete variables occurring in such specifications, this way alleviating state space explosion. The proposed abstraction refinement strategy is based on interpolation for variable assignments and symbolic backward search. We combine in a single algorithm our abstraction method with known efficient lazy abstraction algorithms for the handling of clock variables. Our experiments show that the proposed method performs favorably when compared to other lazy methods, and is suitable to significantly reduce the number of states generated during state space exploration.}
 }
