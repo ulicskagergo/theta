@@ -288,6 +288,7 @@
     note       = {(Accepted.)},
 
     type       = {Workshop},
+    url_slides = {https://easychair.org/smart-slide/slide/ZB18},
     abstract   = {Efficient techniques for reachability analysis of timed automata are zone-based methods that explore the reachable state space from the initial state, and SMT-based methods that perform backward search from the target states. It is also possible to perform backward exploration based on zones, but calculating predecessor states for systems with data variables is computationally expensive, prohibiting the successful application of this approach so far. In this paper we overcome this problem by combining the zone-based backward exploration algorithm with the weakest precondition operation for data variables. This combination allows us to handle diagonal constraints efficiently as opposed to zone-based forward search where most approaches require additional operations to ensure correctness. We demonstrate the applicability and compare the efficiency of the algorithm to existing forward exploration approaches by measurements performed on industrial case studies. We show that data variables can be handled by the weakest precondition operation but the large number of target states often prevents successful verification.},
 }
 
@@ -306,6 +307,5 @@
 
     type       = {Conference},
     url_pdf    = {spin2018.pdf},
-    url_slides = {https://easychair.org/smart-slide/slide/ZB18},
     abstract   = {Systems and software with time dependent behavior are often formally specified using timed automata. For practical real-time systems, these specifications typically contain discrete data variables with nontrivial data flow besides real-valued clock variables. In this paper, we propose a lazy abstraction method for the location reachability problem of timed automata that can be used to efficiently control the visibility of discrete variables occurring in such specifications, this way alleviating state space explosion. The proposed abstraction refinement strategy is based on interpolation for variable assignments and symbolic backward search. We combine in a single algorithm our abstraction method with known efficient lazy abstraction algorithms for the handling of clock variables. Our experiments show that the proposed method performs favorably when compared to other lazy methods, and is suitable to significantly reduce the number of states generated during state space exploration.}
 }
