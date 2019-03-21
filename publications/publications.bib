@@ -326,3 +326,21 @@
     
     abstract = {Software systems are controlling devices that surround us in our everyday life. Many of these systems are safety-critical (e.g., autonomous vehicles, power plants), thus ensuring their correct operation is gaining increasing importance. Formal verification techniques can both reveal errors and give guarantees on correctness with a sound mathematical basis. One of the most widely used formal verification approaches is model checking, which systematically examines all possible states and transitions (i.e., the state space) of the software. However, a major drawback of model checking is its high computational complexity, often preventing its application on real-life software. Counterexample-guided abstraction refinement (CEGAR) is a supplementary technique, making model checking more efficient in practice. CEGAR works by iteratively constructing and refining abstractions in a given abstract domain. There are several existing domains, such as explicit-values, which only track a relevant subset of program variables and predicates, which use logical formulas instead of concrete values. Observations show that different abstract domains are more suitable for different kinds of software systems. Therefore, so-called product domains have also emerged that combine different domains into a single algorithm. In this work, we develop and examine various strategies to combine the explicit-value domain with predicates. Our approaches use different information from the already explored abstract state space to guide further exploration more efficiently. We implement our new strategies on top of Theta, an open source verification framework. This allows us to perform an experiment with a wide range of software systems including industrial PLC codes. We evaluate the strengths and weaknesses of the different approaches and we also compare them to existing methods. Our experiments show that the new strategies can form efficient combinations of the existing algorithms.},
 }
+
+@inproceedings{minisy2019,
+    author     = {Bajkai, Dorina Vikt{\'o}ria and Hajdu, \'{A}kos},
+    title      = {Software Model Checking with a Combination of Explicit Values and Predicates},
+    year       = {2019},
+    booktitle  = {Proceedings of the 26th PhD Mini-Symposium},
+    location   = {Budapest, Hungary},
+    publisher  = {Budapest University of Technology and Economics, Department of Measurement and Information Systems},
+    editor     = {Pataki, B\'{e}la},
+    pages      = {4--7},
+    isbn       = {978-963-313-314-9},
+    doi        = {10.5281/zenodo.2597969},
+    
+    type       = {Local event},
+    keywords   = {CEGAR},
+    url_pdf    = {minisy2019.pdf},
+    abstract   = {Formal verification techniques can both reveal bugs or prove their absence in programs with a sound mathematical basis. However, their high computational complexity often prevents their application on real-world software. Counterexample-guided abstraction refinement (CEGAR) aims to improve efficiency by automatically constructing and refining abstractions for the program. There are several existing abstract domains, such as explicit-values and predicates, but different abstract domains are suitable for different kinds of software. Therefore, product domains have also emerged, which combine different kinds of abstractions in a single algorithm. In this paper, we present a new variant of the CEGAR algorithm, which is a combination of explicit-value analysis and predicate abstraction. We perform an experiment with a wide range of software systems and we compare the results to the existing methods. Measurements show that our new algorithm can efficiently combine the advantages of the different domains.},
+}
