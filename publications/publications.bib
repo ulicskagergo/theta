@@ -286,16 +286,23 @@
 }
 
 @inproceedings{avocs2018,
-    author     = {Farkas, Rebeka and T{\'o}th, Tam{\'a}s and Hajdu, {\'A}kos and V{\"o}r{\"o}s, Andr{\'a}s},
+    author     = {Farkas, Rebeka and T\'oth, Tam\'as and Hajdu, \'{A}kos and V\"or\"os, Andr\'as},
     title      = {Backward reachability analysis for timed automata with data variables},
     year       = {2018},
     booktitle  = {Proceedings of the 18th International Workshop on Automated Verification of Critical Systems},
-
-    note       = {(Accepted.)},
+    
+    editor     = {Pichardie, David and Sighireanu, Mihaela},
+    series     = {Electronic Communications of the EASST},
+    issn       = {1863-2122},
+    volume     = {76},
+    publisher  = {EASST},
+    pages      = {1--20},
+    doi        = {10.14279/tuj.eceasst.76.1076},
 
     type       = {Workshop},
+    url_pdf    = {avocs2018.pdf},
     url_slides = {https://easychair.org/smart-slide/slide/ZB18},
-    abstract   = {Efficient techniques for reachability analysis of timed automata are zone-based methods that explore the reachable state space from the initial state, and SMT-based methods that perform backward search from the target states. It is also possible to perform backward exploration based on zones, but calculating predecessor states for systems with data variables is computationally expensive, prohibiting the successful application of this approach so far. In this paper we overcome this problem by combining the zone-based backward exploration algorithm with the weakest precondition operation for data variables. This combination allows us to handle diagonal constraints efficiently as opposed to zone-based forward search where most approaches require additional operations to ensure correctness. We demonstrate the applicability and compare the efficiency of the algorithm to existing forward exploration approaches by measurements performed on industrial case studies. We show that data variables can be handled by the weakest precondition operation but the large number of target states often prevents successful verification.},
+    abstract   = {Efficient techniques for reachability analysis of timed automata are zone-based methods that explore the reachable state space from the initial state, and SMT-based methods that perform backward search from the target states. It is also possible to perform backward exploration based on zones, but calculating predecessor states for systems with data variables is computationally expensive, prohibiting the successful application of this approach so far. In this paper we overcome this limitation by combining zone-based backward exploration with the weakest precondition operation for data variables. This combination allows us to handle diagonal constraints efficiently as opposed to zone-based forward search where most approaches require additional operations to ensure correctness. We demonstrate the applicability and compare the efficiency of the algorithm to existing forward exploration approaches by measurements performed on industrial case studies. Although the large number of states often prevents successful verification, we show that data variables can be efficienlty handled by the weakest precondition operation. This way our new approach complements existing techniques.},
 }
 
 @incollection{spin2018,
