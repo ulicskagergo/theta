@@ -347,7 +347,19 @@
     doi        = {10.5281/zenodo.2597969},
     
     type       = {Local event},
-    keywords   = {CEGAR},
     url_pdf    = {minisy2019.pdf},
     abstract   = {Formal verification techniques can both reveal bugs or prove their absence in programs with a sound mathematical basis. However, their high computational complexity often prevents their application on real-world software. Counterexample-guided abstraction refinement (CEGAR) aims to improve efficiency by automatically constructing and refining abstractions for the program. There are several existing abstract domains, such as explicit-values and predicates, but different abstract domains are suitable for different kinds of software. Therefore, product domains have also emerged, which combine different kinds of abstractions in a single algorithm. In this paper, we present a new variant of the CEGAR algorithm, which is a combination of explicit-value analysis and predicate abstraction. We perform an experiment with a wide range of software systems and we compare the results to the existing methods. Measurements show that our new algorithm can efficiently combine the advantages of the different domains.},
+}
+
+
+
+@article{jar2019,
+	author   = {{\'A}kos Hajdu and Zolt\'an Micskei},
+	title    = {Efficient Strategies for {CEGAR}-based Model Checking},
+	journal  = {Journal of Automated Reasoning},
+    note     = {(Accepted)},
+    year     = {2019},
+
+    type     = {Journal},
+    abstract = {Automated formal verification is often based on the Counterexample-Guided Abstraction Refinement (CEGAR) approach. Many variants of CEGAR have been developed over the years as different problem domains usually require different strategies for efficient verification. This has lead to generic and configurable CEGAR frameworks, which can incorporate various algorithms. In our paper we propose six novel improvements to different aspects of the CEGAR approach, including both abstraction and refinement. We implement our new contributions in the Theta framework allowing us to compare them with state-of-the-art algorithms. We conduct an experiment on a diverse set of models to address research questions related to the effectiveness and efficiency of our new strategies. Results show that our new contributions perform well in general. Moreover, we highlight certain cases where performance could not be increased or where a remarkable improvement is achieved.},
 }
