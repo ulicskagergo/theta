@@ -351,15 +351,26 @@
     abstract   = {Formal verification techniques can both reveal bugs or prove their absence in programs with a sound mathematical basis. However, their high computational complexity often prevents their application on real-world software. Counterexample-guided abstraction refinement (CEGAR) aims to improve efficiency by automatically constructing and refining abstractions for the program. There are several existing abstract domains, such as explicit-values and predicates, but different abstract domains are suitable for different kinds of software. Therefore, product domains have also emerged, which combine different kinds of abstractions in a single algorithm. In this paper, we present a new variant of the CEGAR algorithm, which is a combination of explicit-value analysis and predicate abstraction. We perform an experiment with a wide range of software systems and we compare the results to the existing methods. Measurements show that our new algorithm can efficiently combine the advantages of the different domains.},
 }
 
-
-
 @article{jar2019,
 	author   = {{\'A}kos Hajdu and Zolt\'an Micskei},
 	title    = {Efficient Strategies for {CEGAR}-based Model Checking},
 	journal  = {Journal of Automated Reasoning},
-    note     = {(Accepted)},
+    volume   = {Online first},
     year     = {2019},
+    doi      = {10.1007/s10817-019-09535-x},
 
     type     = {Journal},
+    url_pdf  = {https://link.springer.com/content/pdf/10.1007%2Fs10817-019-09535-x.pdf},
     abstract = {Automated formal verification is often based on the Counterexample-Guided Abstraction Refinement (CEGAR) approach. Many variants of CEGAR have been developed over the years as different problem domains usually require different strategies for efficient verification. This has lead to generic and configurable CEGAR frameworks, which can incorporate various algorithms. In our paper we propose six novel improvements to different aspects of the CEGAR approach, including both abstraction and refinement. We implement our new contributions in the Theta framework allowing us to compare them with state-of-the-art algorithms. We conduct an experiment on a diverse set of models to address research questions related to the effectiveness and efficiency of our new strategies. Results show that our new contributions perform well in general. Moreover, we highlight certain cases where performance could not be increased or where a remarkable improvement is achieved.},
+}
+
+@misc{sallaigyMsc2019,
+    author = {Sallai, Gyula},
+    title = {LLVM IR-based Transformations for Software Model Checking},
+    note = {Master's Thesis, Budapest University of Technology and Economics},
+    year = {2016},
+
+    type = {Thesis},
+    url_pdf = {sallaigyMsc2019.pdf},    
+    abstract = {As embedded systems are becoming more and more common in our lives, the importance of their safe and fault-free operation is becoming even more critical. Model checking can prove both the presence and absence of certain errors in software systems, making it suitable for verifying safety-critical systems. The field of model checking has made a tremendous progress in the last decades, providing a great set of fast and effective algorithms. However, despite all this, model checking is still not widely adopted in a standard development workflow due to its poor accessibility. In this work, we propose a user-friendly and efficient model checking workflow, that is able to translate C programs into the language of multiple model checking engines. The workflow uses a check instrumentation workflow to represent certain software properties as reachability problems and automatically map verification results back to the level of the original source code. In order to avoid translating from a possibly diverse set of input language dialects, we make use of the LLVM compiler infrastructure framework and its intermediate program representation. Furthermore, we shall use LLVM to extend the transformation workflow with a set of built-in and custom optimization transformations. To handle the ambiguity of memory-related language constructs, we propose a generic memory model interface that may be used to implement memory models of different strengths and trade-offs. At the end of the workflow, the resulting models may verified by our own implementation of the bounded model checking algorithm, or by using the CEGAR-based Theta model checking framework. We provide a traceability component, which is able to represent verification verdicts in a user-friendly format and also able to generate an executable mock environment that demonstrates found errors in an executable program. In addition, we provide benchmarks to demonstrate the usability of this workflow.},
 }
