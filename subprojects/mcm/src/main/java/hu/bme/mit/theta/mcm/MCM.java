@@ -1,68 +1,43 @@
 package hu.bme.mit.theta.mcm;
 
-import hu.bme.mit.theta.mcm.graphfilter.interfaces.MemoryAccess;
+import hu.bme.mit.theta.mcm.graph.constraint.Constraint;
+import hu.bme.mit.theta.mcm.graph.filter.interfaces.MemoryAccess;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MCM {
-    private boolean violated;
-
-    private final Set<Constraint> constraints;
-    private Constraint violator;
+    private final Map<Constraint, Result> constraints;
 
     public MCM() {
-        constraints = new HashSet<>();
+        constraints = new HashMap<>();
     }
 
-    public MCM(boolean violated, Set<Constraint> constraints, Constraint violator) {
-        this.violated = violated;
-        this.constraints = new HashSet<>();
-        for (Constraint constraint : constraints) {
-            Constraint duplicated = constraint.duplicate();
-            this.constraints.add(duplicated);
-            if(violator == constraint) this.violator = duplicated;
+    public MCM(Map<Constraint, Result> constraints) {
+        this.constraints = new HashMap<>();
+        for (Map.Entry<Constraint, Result> constraint : constraints.entrySet()) {
+            Constraint duplicated = constraint.getKey().duplicate();
+            this.constraints.put(duplicated, constraint.getValue());
         }
     }
 
     public void addConstraint(Constraint g) {
-        constraints.add(g);
-    }
-
-    public Set<Constraint> getConstraints() {
-        return constraints;
+        constraints.put(g, Result.ok());
     }
 
     public void checkMk(MemoryAccess source, MemoryAccess target, String label, boolean isFinal) {
-        for (Constraint constraint : constraints) {
-            if(!constraint.checkMk(source, target, label, isFinal)) {
-                violated = true;
-                violator = constraint;
-                return;
-            }
-        }
-        violated = false;
+        constraints.replaceAll((c, v) -> c.checkMk(source, target, label, isFinal));
     }
 
     public void checkRm(MemoryAccess source, MemoryAccess target, String label) {
-        for (Constraint constraint : constraints) {
-            if(!constraint.checkRm(source, target, label)) {
-                violated = true;
-                return;
-            }
-        }
-        violated = false;
-    }
-
-    public boolean isViolated() {
-        return violated;
+        constraints.replaceAll((c, v) -> c.checkRm(source, target, label));
     }
 
     public MCM duplicate() {
-        return new MCM(violated, constraints, violator);
+        return new MCM(constraints);
     }
 
-    public Constraint getViolator() {
-        return violator;
+    public Map<Constraint, Result> getConstraints() {
+        return constraints;
     }
 }

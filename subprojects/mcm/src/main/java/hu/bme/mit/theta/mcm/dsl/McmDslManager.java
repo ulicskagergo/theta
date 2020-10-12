@@ -5,7 +5,7 @@ import hu.bme.mit.theta.core.type.Type;
 import hu.bme.mit.theta.mcm.MCM;
 import hu.bme.mit.theta.mcm.dsl.gen.McmDslLexer;
 import hu.bme.mit.theta.mcm.dsl.gen.McmDslParser;
-import hu.bme.mit.theta.mcm.graphfilter.interfaces.Process;
+import hu.bme.mit.theta.mcm.graph.filter.interfaces.Process;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;

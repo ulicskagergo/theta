@@ -9,6 +9,8 @@ import hu.bme.mit.theta.core.stmt.Stmt;
 import hu.bme.mit.theta.core.type.LitExpr;
 import hu.bme.mit.theta.core.type.booltype.BoolLitExpr;
 import hu.bme.mit.theta.mcm.MCM;
+import hu.bme.mit.theta.mcm.Result;
+import hu.bme.mit.theta.mcm.graph.constraint.Constraint;
 import hu.bme.mit.theta.xcfa.XCFA;
 
 import java.io.BufferedWriter;
@@ -206,7 +208,8 @@ public class ExecutionGraph implements Runnable{
                 lastRead.get(proc).get(global),
                 proc,
                 currentlyAtomic == proc,
-                lastNode.get(proc));
+                lastNode.get(proc),
+                true); // TODO
         lastRead.get(proc).put(global, read);
         addNode(proc, read);
 
@@ -217,7 +220,7 @@ public class ExecutionGraph implements Runnable{
             if(i < size - 1) {
                 ExecutionGraph executionGraph = duplicate(i, step);
                 executionGraph.edges.get(write).add(edge);
-                executionGraph.mcm.checkMk(write, read, "rf", false);
+                executionGraph.mcm.checkMk(write, read, "rf", write.isFinal() && read.isFinal());
                 executionGraph.mutablePartitionedValuation.put(getPartitionId(proc),global,write.getValue());
                 executionGraph.fr.put(read, Tuple2.of(write, edge));
                 threadPool.execute(executionGraph);
@@ -237,7 +240,7 @@ public class ExecutionGraph implements Runnable{
      * Add a fence node
      */
     void addFence(XCFA.Process proc, String type) {
-        Fence fence = new Fence(null, proc, lastNode.get(proc), type);
+        Fence fence = new Fence(null, proc, lastNode.get(proc), type, true); //TODO
         addNode(proc, fence);
     }
 
@@ -245,7 +248,7 @@ public class ExecutionGraph implements Runnable{
      * Add a write node
      */
     void addWrite(XCFA.Process proc, VarDecl<?> local, VarDecl<?> global) {
-        @SuppressWarnings("OptionalGetWithoutIsPresent") Write write = new Write(global, mutablePartitionedValuation.eval(local).get(), proc, lastNode.get(proc));
+        @SuppressWarnings("OptionalGetWithoutIsPresent") Write write = new Write(global, mutablePartitionedValuation.eval(local).get(), proc, lastNode.get(proc), true); //TODO
         addNode(proc, write);
         this.writes.get(global).add(write);
         List<List<Read>> revisitSets = getRevisitSets(global);
@@ -286,7 +289,7 @@ public class ExecutionGraph implements Runnable{
                     Tuple2<MemoryAccess, String> edge = Tuple2.of(read, "rf");
                     executionGraph.revisitRead(read);
                     executionGraph.edges.get(write).add(edge);
-                    executionGraph.mcm.checkMk(write, read, "rf", false);
+                    executionGraph.mcm.checkMk(write, read, "rf", write.isFinal() && read.isFinal());
                     executionGraph.fr.put(read, Tuple2.of(write, edge));
                     executionGraph.mutablePartitionedValuation.put(getPartitionId(proc),global,write.getValue());
                 }
@@ -304,7 +307,7 @@ public class ExecutionGraph implements Runnable{
      * Add an initial write node
      */
     void addInititalWrite(VarDecl<?> global, LitExpr<?> value) {
-        Write write = new Write(global, value, null, null);
+        Write write = new Write(global, value, null, null, true);
         edges.put(write, new HashSet<>());
         initialWrites.add(write);
         if(!writes.containsKey(global)) {
@@ -368,11 +371,18 @@ public class ExecutionGraph implements Runnable{
         }).collect(Collectors.toList());
     }
 
+    private Collection<XCFA.Process> getProcesses() {
+        if(currentlyAtomic != null) return Collections.singleton(currentlyAtomic);
+        else {
+            return xcfa.getProcesses();
+        }
+    }
+
     /*
      * Executes the next statement to execute
      */
     private boolean executeNextStmt() {
-        for(XCFA.Process process : currentlyAtomic == null ? xcfa.getProcesses() : Collections.singleton(currentlyAtomic)) {
+        for(XCFA.Process process : getProcesses()) {
             StackFrame stackFrame;
             if(stackFrames.get(process).size() == 0) {
                 if (handleNewEdge(process, process.getMainProcedure().getInitLoc())) {
@@ -445,12 +455,12 @@ public class ExecutionGraph implements Runnable{
         edges.put(memoryAccess, new HashSet<>());
         if(lastNode.get(proc) != null) {
             edges.get(lastNode.get(proc)).add(Tuple2.of(memoryAccess, "po"));
-            mcm.checkMk(lastNode.get(proc), memoryAccess, "po", false);
+            mcm.checkMk(lastNode.get(proc), memoryAccess, "po", lastNode.get(proc).isFinal() && memoryAccess.isFinal());
         }
         else {
             initialWrites.forEach(write -> {
                 edges.get(write).add(Tuple2.of(memoryAccess, "po"));
-                mcm.checkMk(write, memoryAccess, "po", false);
+                mcm.checkMk(write, memoryAccess, "po", lastNode.get(proc).isFinal() && memoryAccess.isFinal());
             });
         }
         lastNode.put(proc, memoryAccess);
@@ -483,11 +493,24 @@ public class ExecutionGraph implements Runnable{
 
     private void invalidateFuture(MemoryAccess memoryAccess, Map<XCFA.Process, Boolean> atomic, boolean first) {
         if(memoryAccess instanceof Read) {
+            for (Tuple2<MemoryAccess, String> objects : edges.get(fr.get(memoryAccess).get1())) {
+                mcm.checkRm(fr.get(memoryAccess).get1(), objects.get1(), objects.get2());
+            }
             edges.get(fr.get(memoryAccess).get1()).remove(fr.get(memoryAccess).get2());
             fr.remove(memoryAccess);
             revisitableReads.get(memoryAccess.getGlobalVariable()).remove(memoryAccess);
         }
         else if(memoryAccess instanceof Write) {
+            int i = mo.get(memoryAccess.getGlobalVariable()).indexOf(memoryAccess);
+            if(i > 0) {
+                mcm.checkRm(mo.get(memoryAccess.getGlobalVariable()).get(i - 1), memoryAccess, "mo");
+            }
+            if(i < mo.get(memoryAccess.getGlobalVariable()).size()-1) {
+                mcm.checkRm(memoryAccess, mo.get(memoryAccess.getGlobalVariable()).get(i + 1), "mo");
+                if(i > 0) {
+                    mcm.checkMk(mo.get(memoryAccess.getGlobalVariable()).get(i - 1), mo.get(memoryAccess.getGlobalVariable()).get(i + 1), "mo", false);
+                }
+            }
             mo.get(memoryAccess.getGlobalVariable()).remove(memoryAccess);
         }
         for(Tuple2<MemoryAccess, String> edge : edges.get(memoryAccess)) {
@@ -573,10 +596,18 @@ public class ExecutionGraph implements Runnable{
                         bufferedWriter.newLine();
                     }
                 }
-                if(mcm.isViolated()) {
-                    bufferedWriter.write("label=\"Violated " + mcm.getViolator().getName() + "\"");
-                    bufferedWriter.newLine();
+                bufferedWriter.write("fontcolor=red");
+                bufferedWriter.newLine();
+                bufferedWriter.write("label=\"");
+                for (Map.Entry<Constraint, Result> entry : mcm.getConstraints().entrySet()) {
+                    Constraint constraint = entry.getKey();
+                    Result result = entry.getValue();
+                    if (result.getResult() != Result.ResultType.OK) {
+                        bufferedWriter.write(constraint.getName() + System.lineSeparator());
+                    }
                 }
+                bufferedWriter.write("\"");
+                bufferedWriter.newLine();
                 bufferedWriter.write("}");
             }
         }

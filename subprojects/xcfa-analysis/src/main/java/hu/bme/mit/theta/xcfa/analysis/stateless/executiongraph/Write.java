@@ -4,7 +4,7 @@ import hu.bme.mit.theta.core.decl.VarDecl;
 import hu.bme.mit.theta.core.type.LitExpr;
 import hu.bme.mit.theta.xcfa.XCFA;
 
-class Write extends MemoryAccess implements hu.bme.mit.theta.mcm.graphfilter.interfaces.Write {
+class Write extends MemoryAccess implements hu.bme.mit.theta.mcm.graph.filter.interfaces.Write {
     private static int cnt;
 
     static {
@@ -14,8 +14,8 @@ class Write extends MemoryAccess implements hu.bme.mit.theta.mcm.graphfilter.int
     private final int id;
     private final LitExpr<?> value;
 
-    Write(VarDecl<?> globalVar, LitExpr<?> value, XCFA.Process parentProcess, MemoryAccess lastNode) {
-        super(globalVar, parentProcess, lastNode);
+    Write(VarDecl<?> globalVar, LitExpr<?> value, XCFA.Process parentProcess, MemoryAccess lastNode, boolean isFinal) {
+        super(globalVar, parentProcess, lastNode, isFinal);
         this.value = value;
         id = cnt++;
     }

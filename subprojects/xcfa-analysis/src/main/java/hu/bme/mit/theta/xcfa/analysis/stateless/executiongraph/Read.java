@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-class Read extends MemoryAccess implements hu.bme.mit.theta.mcm.graphfilter.interfaces.Read {
+class Read extends MemoryAccess implements hu.bme.mit.theta.mcm.graph.filter.interfaces.Read {
     private static int cnt;
 
     static {
@@ -25,8 +25,8 @@ class Read extends MemoryAccess implements hu.bme.mit.theta.mcm.graphfilter.inte
 
     private final List<Read> precedingReads;
 
-    Read(VarDecl<?> globalVar, VarDecl<?> localVar, Valuation savedState, List<StackFrame> savedStack, Read lastRead, XCFA.Process parentProcess, boolean atomic, MemoryAccess lastNode) {
-        super(globalVar, parentProcess, lastNode);
+    Read(VarDecl<?> globalVar, VarDecl<?> localVar, Valuation savedState, List<StackFrame> savedStack, Read lastRead, XCFA.Process parentProcess, boolean atomic, MemoryAccess lastNode, boolean isFinal) {
+        super(globalVar, parentProcess, lastNode, isFinal);
         this.localVar = localVar;
         this.savedStack = new ArrayList<>();
         savedStack.forEach(stackFrame -> this.savedStack.add(stackFrame.duplicate()));

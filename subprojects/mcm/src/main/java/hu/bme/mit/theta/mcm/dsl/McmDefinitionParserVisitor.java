@@ -2,16 +2,16 @@ package hu.bme.mit.theta.mcm.dsl;
 
 import hu.bme.mit.theta.core.decl.VarDecl;
 import hu.bme.mit.theta.core.type.Type;
-import hu.bme.mit.theta.mcm.AcyclicConstraint;
-import hu.bme.mit.theta.mcm.EmptyConstraint;
+import hu.bme.mit.theta.mcm.graph.constraint.AcyclicConstraint;
+import hu.bme.mit.theta.mcm.graph.constraint.EmptyConstraint;
 import hu.bme.mit.theta.mcm.MCM;
 import hu.bme.mit.theta.mcm.dsl.gen.McmDslBaseVisitor;
 import hu.bme.mit.theta.mcm.dsl.gen.McmDslParser;
-import hu.bme.mit.theta.mcm.graphfilter.*;
-import hu.bme.mit.theta.mcm.graphfilter.interfaces.Fence;
-import hu.bme.mit.theta.mcm.graphfilter.interfaces.Process;
-import hu.bme.mit.theta.mcm.graphfilter.interfaces.Read;
-import hu.bme.mit.theta.mcm.graphfilter.interfaces.Write;
+import hu.bme.mit.theta.mcm.graph.filter.*;
+import hu.bme.mit.theta.mcm.graph.filter.interfaces.Fence;
+import hu.bme.mit.theta.mcm.graph.filter.interfaces.Process;
+import hu.bme.mit.theta.mcm.graph.filter.interfaces.Read;
+import hu.bme.mit.theta.mcm.graph.filter.interfaces.Write;
 import org.antlr.v4.runtime.Token;
 
 import java.util.*;

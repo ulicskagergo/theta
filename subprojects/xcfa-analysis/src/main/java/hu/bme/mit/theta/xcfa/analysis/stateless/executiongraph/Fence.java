@@ -3,7 +3,7 @@ package hu.bme.mit.theta.xcfa.analysis.stateless.executiongraph;
 import hu.bme.mit.theta.core.decl.VarDecl;
 import hu.bme.mit.theta.xcfa.XCFA;
 
-public class Fence extends MemoryAccess implements hu.bme.mit.theta.mcm.graphfilter.interfaces.Fence {
+public class Fence extends MemoryAccess implements hu.bme.mit.theta.mcm.graph.filter.interfaces.Fence {
     private static int cnt;
 
     static {
@@ -12,8 +12,8 @@ public class Fence extends MemoryAccess implements hu.bme.mit.theta.mcm.graphfil
 
     private final int id;
     private final String type;
-    Fence(VarDecl<?> globalVar, XCFA.Process parentProcess, MemoryAccess lastNode, String type) {
-        super(globalVar, parentProcess, lastNode);
+    Fence(VarDecl<?> globalVar, XCFA.Process parentProcess, MemoryAccess lastNode, String type, boolean isFinal) {
+        super(globalVar, parentProcess, lastNode, isFinal);
         this.type = type;
         id = cnt++;
     }

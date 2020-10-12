@@ -7,7 +7,7 @@ import hu.bme.mit.theta.xcfa.XCFA;
 import java.util.List;
 import java.util.Map;
 
-abstract class MemoryAccess implements hu.bme.mit.theta.mcm.graphfilter.interfaces.MemoryAccess {
+abstract class MemoryAccess implements hu.bme.mit.theta.mcm.graph.filter.interfaces.MemoryAccess {
     protected final VarDecl<?> globalVar;
     private final XCFA.Process parentProcess;
     private final MemoryAccess lastNode;
