@@ -1,6 +1,8 @@
 package hu.bme.mit.theta.mcm.graph;
 
+import hu.bme.mit.theta.core.decl.VarDecl;
 import hu.bme.mit.theta.mcm.graph.filter.interfaces.MemoryAccess;
+import hu.bme.mit.theta.mcm.graph.filter.interfaces.Process;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +12,9 @@ public class GraphOrNodeSet {
     private final boolean isGraph;
     private final Graph graph;
     private final Set<MemoryAccess> nodeSet;
+    private VarDecl<?> varDecl;
+    private Process process;
+    private MemoryAccess memoryAccess;
 
     private GraphOrNodeSet(Graph graph) {
         isGraph = true;
@@ -62,5 +67,29 @@ public class GraphOrNodeSet {
         }
         ret.setChanged(isChanged());
         return ret;
+    }
+
+    public VarDecl<?> getVarDecl() {
+        return varDecl;
+    }
+
+    public void setVarDecl(VarDecl<?> varDecl) {
+        this.varDecl = varDecl;
+    }
+
+    public Process getProcess() {
+        return process;
+    }
+
+    public void setProcess(Process process) {
+        this.process = process;
+    }
+
+    public MemoryAccess getMemoryAccess() {
+        return memoryAccess;
+    }
+
+    public void setMemoryAccess(MemoryAccess memoryAccess) {
+        this.memoryAccess = memoryAccess;
     }
 }

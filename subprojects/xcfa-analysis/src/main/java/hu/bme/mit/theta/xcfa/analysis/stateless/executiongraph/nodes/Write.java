@@ -1,10 +1,10 @@
-package hu.bme.mit.theta.xcfa.analysis.stateless.executiongraph;
+package hu.bme.mit.theta.xcfa.analysis.stateless.executiongraph.nodes;
 
 import hu.bme.mit.theta.core.decl.VarDecl;
 import hu.bme.mit.theta.core.type.LitExpr;
 import hu.bme.mit.theta.xcfa.XCFA;
 
-class Write extends MemoryAccess implements hu.bme.mit.theta.mcm.graph.filter.interfaces.Write {
+public class Write extends MemoryAccess implements hu.bme.mit.theta.mcm.graph.filter.interfaces.Write {
     private static int cnt;
 
     static {
@@ -14,13 +14,13 @@ class Write extends MemoryAccess implements hu.bme.mit.theta.mcm.graph.filter.in
     private final int id;
     private final LitExpr<?> value;
 
-    Write(VarDecl<?> globalVar, LitExpr<?> value, XCFA.Process parentProcess, MemoryAccess lastNode, boolean isFinal) {
-        super(globalVar, parentProcess, lastNode, isFinal);
+    public Write(VarDecl<?> globalVar, LitExpr<?> value, XCFA.Process parentProcess) {
+        super(globalVar, parentProcess);
         this.value = value;
         id = cnt++;
     }
 
-    LitExpr<?> getValue() {
+    public LitExpr<?> getValue() {
         return value;
     }
 

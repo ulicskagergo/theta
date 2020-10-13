@@ -43,7 +43,10 @@ public class ForEachNode extends Filter {
             for (MemoryAccess memoryAccess : pattern.getNodeSet()) {
                 ops.putIfAbsent(memoryAccess, op.duplicate(this.forEachNodes, new Stack<>(), new Stack<>()));
                 currentNode = memoryAccess;
-                retSet.addAll(ops.get(memoryAccess).filterMk(source, target, label, isFinal));
+                ops.get(memoryAccess).filterMk(source, target, label, isFinal).forEach(graphOrNodeSet -> {
+                    graphOrNodeSet.setMemoryAccess(currentNode);
+                    retSet.add(graphOrNodeSet);
+                });
             }
         }
         return retSet;
@@ -58,7 +61,10 @@ public class ForEachNode extends Filter {
             for (MemoryAccess memoryAccess : pattern.getNodeSet()) {
                 ops.putIfAbsent(memoryAccess, op.duplicate(this.forEachNodes, new Stack<>(), new Stack<>()));
                 currentNode = memoryAccess;
-                retSet.addAll(ops.get(memoryAccess).filterRm(source, target, label));
+                ops.get(memoryAccess).filterRm(source, target, label).forEach(graphOrNodeSet -> {
+                    graphOrNodeSet.setMemoryAccess(currentNode);
+                    retSet.add(graphOrNodeSet);
+                });
             }
         }
         return retSet;

@@ -31,7 +31,10 @@ public class ForEachThread extends Filter {
         Set<GraphOrNodeSet> retSet = new HashSet<>();
         for (Process process : processes) {
             currentProcess = process;
-            retSet.addAll(op.get(currentProcess).filterMk(source, target, label, isFinal));
+            op.get(currentProcess).filterMk(source, target, label, isFinal).forEach(graphOrNodeSet -> {
+                graphOrNodeSet.setProcess(currentProcess);
+                retSet.add(graphOrNodeSet);
+            });
         }
         return retSet;
     }
@@ -41,7 +44,10 @@ public class ForEachThread extends Filter {
         Set<GraphOrNodeSet> retSet = new HashSet<>();
         for (Process process : processes) {
             currentProcess = process;
-            retSet.addAll(op.get(currentProcess).filterRm(source, target, label));
+            op.get(currentProcess).filterRm(source, target, label).forEach(graphOrNodeSet -> {
+                graphOrNodeSet.setProcess(currentProcess);
+                retSet.add(graphOrNodeSet);
+            });
         }
         return retSet;
     }

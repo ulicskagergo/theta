@@ -1,15 +1,16 @@
-package hu.bme.mit.theta.xcfa.analysis.stateless.executiongraph;
+package hu.bme.mit.theta.xcfa.analysis.stateless.executiongraph.nodes;
 
 import hu.bme.mit.theta.core.decl.VarDecl;
 import hu.bme.mit.theta.core.model.MutablePartitionedValuation;
 import hu.bme.mit.theta.core.model.Valuation;
 import hu.bme.mit.theta.xcfa.XCFA;
+import hu.bme.mit.theta.xcfa.analysis.stateless.executor.StackFrame;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-class Read extends MemoryAccess implements hu.bme.mit.theta.mcm.graph.filter.interfaces.Read {
+public class Read extends MemoryAccess implements hu.bme.mit.theta.mcm.graph.filter.interfaces.Read {
     private static int cnt;
 
     static {
@@ -23,21 +24,12 @@ class Read extends MemoryAccess implements hu.bme.mit.theta.mcm.graph.filter.int
     private final List<StackFrame> savedStack;
     private final boolean savedAtomicity;
 
-    private final List<Read> precedingReads;
-
-    Read(VarDecl<?> globalVar, VarDecl<?> localVar, Valuation savedState, List<StackFrame> savedStack, Read lastRead, XCFA.Process parentProcess, boolean atomic, MemoryAccess lastNode, boolean isFinal) {
-        super(globalVar, parentProcess, lastNode, isFinal);
+    public Read(VarDecl<?> globalVar, VarDecl<?> localVar, Valuation savedState, List<StackFrame> savedStack, XCFA.Process parentProcess, boolean atomic) {
+        super(globalVar, parentProcess);
         this.localVar = localVar;
         this.savedStack = new ArrayList<>();
         savedStack.forEach(stackFrame -> this.savedStack.add(stackFrame.duplicate()));
         this.savedState = savedState;
-        if (lastRead == null) {
-            precedingReads = new ArrayList<>();
-        }
-        else {
-            precedingReads = new ArrayList<>(lastRead.precedingReads);
-            precedingReads.add(lastRead);
-        }
         this.savedAtomicity = atomic;
         id = cnt++;
     }
@@ -46,13 +38,9 @@ class Read extends MemoryAccess implements hu.bme.mit.theta.mcm.graph.filter.int
         return localVar;
     }
 
-    List<Read> getPrecedingReads() {
-        return precedingReads;
-    }
-
     @Override
-    boolean revert(Map<XCFA.Process, List<StackFrame>> stackFrames, Map<XCFA.Process, MemoryAccess> lastNode, MutablePartitionedValuation mutablePartitionedValuation, int partitionId) {
-        super.revert(stackFrames, lastNode, mutablePartitionedValuation, partitionId);
+    public boolean revert(Map<XCFA.Process, List<StackFrame>> stackFrames, MutablePartitionedValuation mutablePartitionedValuation, int partitionId) {
+        super.revert(stackFrames, mutablePartitionedValuation, partitionId);
         ArrayList<StackFrame> stackCopy = new ArrayList<>();
         savedStack.forEach(stackFrame -> stackCopy.add(stackFrame.duplicate()));
         stackFrames.put(getProcess(), stackCopy);

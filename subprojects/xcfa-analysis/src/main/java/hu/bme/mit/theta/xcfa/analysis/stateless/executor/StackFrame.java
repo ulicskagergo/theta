@@ -1,40 +1,40 @@
-package hu.bme.mit.theta.xcfa.analysis.stateless.executiongraph;
+package hu.bme.mit.theta.xcfa.analysis.stateless.executor;
 
 import hu.bme.mit.theta.core.stmt.Stmt;
 import hu.bme.mit.theta.xcfa.XCFA;
 
-class StackFrame {
+public class StackFrame {
     private final XCFA.Process.Procedure.Edge edge;
     private Stmt stmt;
     private boolean lastStmt;
 
-    StackFrame(XCFA.Process.Procedure.Edge edge, Stmt stmt) {
+    public StackFrame(XCFA.Process.Procedure.Edge edge, Stmt stmt) {
         this.edge = edge;
         this.stmt = stmt;
         this.lastStmt = false;
     }
 
-    XCFA.Process.Procedure.Edge getEdge() {
+    public XCFA.Process.Procedure.Edge getEdge() {
         return edge;
     }
 
-    Stmt getStmt() {
+    public Stmt getStmt() {
         return stmt;
     }
 
-    boolean isLastStmt() {
+    public boolean isLastStmt() {
         return lastStmt;
     }
 
-    void setLastStmt() {
+    public void setLastStmt() {
         this.lastStmt = true;
     }
 
-    void setStmt(Stmt stmt) {
+    public void setStmt(Stmt stmt) {
         this.stmt = stmt;
     }
 
-    StackFrame duplicate() {
+    public StackFrame duplicate() {
         return new StackFrame(edge, stmt);
     }
 }

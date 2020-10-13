@@ -1,4 +1,4 @@
-package hu.bme.mit.theta.xcfa.analysis.stateless.executiongraph;
+package hu.bme.mit.theta.xcfa.analysis.stateless.executiongraph.nodes;
 
 import hu.bme.mit.theta.core.decl.VarDecl;
 import hu.bme.mit.theta.xcfa.XCFA;
@@ -12,8 +12,8 @@ public class Fence extends MemoryAccess implements hu.bme.mit.theta.mcm.graph.fi
 
     private final int id;
     private final String type;
-    Fence(VarDecl<?> globalVar, XCFA.Process parentProcess, MemoryAccess lastNode, String type, boolean isFinal) {
-        super(globalVar, parentProcess, lastNode, isFinal);
+    public Fence(VarDecl<?> globalVar, XCFA.Process parentProcess, String type) {
+        super(globalVar, parentProcess);
         this.type = type;
         id = cnt++;
     }

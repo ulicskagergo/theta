@@ -33,7 +33,10 @@ public class ForEachVar extends Filter{
         Set<GraphOrNodeSet> retSet = new HashSet<>();
         for (VarDecl<?> variable : variables) {
             currentVariable = variable;
-            retSet.addAll(op.get(variable).filterMk(source, target, label, isFinal));
+            op.get(currentVariable).filterMk(source, target, label, isFinal).forEach(graphOrNodeSet -> {
+                graphOrNodeSet.setVarDecl(currentVariable);
+                retSet.add(graphOrNodeSet);
+            });
         }
         return retSet;
     }
@@ -45,7 +48,10 @@ public class ForEachVar extends Filter{
         Set<GraphOrNodeSet> retSet = new HashSet<>();
         for (VarDecl<?> variable : variables) {
             currentVariable = variable;
-            retSet.addAll(op.get(variable).filterRm(source, target, label));
+            op.get(currentVariable).filterRm(source, target, label).forEach(graphOrNodeSet -> {
+                graphOrNodeSet.setVarDecl(currentVariable);
+                retSet.add(graphOrNodeSet);
+            });
         }
         return retSet;
     }
