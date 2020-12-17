@@ -352,15 +352,18 @@
 }
 
 @article{jar2019,
-    author   = {{\'A}kos Hajdu and Zolt\'an Micskei},
-    title    = {Efficient Strategies for {CEGAR}-based Model Checking},
-    journal  = {Journal of Automated Reasoning},
-    volume   = {Online first},
-    year     = {2019},
+	author   = {{\'A}kos Hajdu and Zolt\'an Micskei},
+	title    = {Efficient Strategies for {CEGAR}-based Model Checking},
+	journal  = {Journal of Automated Reasoning},
+    volume   = {64},
+    number   = {6},
+    pages    = {1051--1091},
+    year     = {2020},
     doi      = {10.1007/s10817-019-09535-x},
 
     type     = {Journal},
     url_pdf  = {https://link.springer.com/content/pdf/10.1007%2Fs10817-019-09535-x.pdf},
+    url_link = {https://link.springer.com/article/10.1007/s10817-019-09535-x},
     abstract = {Automated formal verification is often based on the Counterexample-Guided Abstraction Refinement (CEGAR) approach. Many variants of CEGAR have been developed over the years as different problem domains usually require different strategies for efficient verification. This has lead to generic and configurable CEGAR frameworks, which can incorporate various algorithms. In our paper we propose six novel improvements to different aspects of the CEGAR approach, including both abstraction and refinement. We implement our new contributions in the Theta framework allowing us to compare them with state-of-the-art algorithms. We conduct an experiment on a diverse set of models to address research questions related to the effectiveness and efficiency of our new strategies. Results show that our new contributions perform well in general. Moreover, we highlight certain cases where performance could not be increased or where a remarkable improvement is achieved.},
 }
 
@@ -404,9 +407,15 @@
 @inproceedings{openmbee2020,
     author     = {Benedek Horv{\'a}th and Bence Graics and {\'A}kos Hajdu and Zolt{\'a}n Micskei and Vince Moln{\'a}r and Istv{\'a}n R{\'a}th and Luigi Andolfato and Ivan Gomes and Robert Karban},
     title      = {Model Checking as a Service: Towards Pragmatic Hidden Formal Methods},
-    booktitle  = {1st Workshop on Open Model Based Engineering Environment},
+	booktitle  = {Proceedings of the 23rd ACM/IEEE International Conference on Model Driven Engineering Languages and Systems: Companion Proceedings},
+	articleno  = {37},
+	numpages   = {5},
     year       = {2020},
-    note       = {(Accepted)},
+	doi        = {10.1145/3417990.3421407},
 
     type       = {Workshop},
+
+    url_pdf    = {openmbee2020.pdf},
+	url_link   = {https://doi.org/10.1145/3417990.3421407},
+	abstract   = {Executable models can be used to support all engineering activities in Model-Based Systems Engineering. Testing and simulation of such models can provide early feedback about design choices. However, in today's complex systems, failures could arise due to subtle errors that are hard to find without checking all possible execution paths. Formal methods, and especially model checking can uncover such subtle errors, yet their usage in practice is limited due to the specialized expertise and high computing power required. Therefore we created an automated, cloud-based environment that can verify complex reachability properties on SysML State Machines using hidden model checkers. The approach and the prototype is illustrated using an example from the aerospace domain.},
 }
