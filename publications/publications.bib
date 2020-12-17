@@ -419,3 +419,23 @@
 	url_link   = {https://doi.org/10.1145/3417990.3421407},
 	abstract   = {Executable models can be used to support all engineering activities in Model-Based Systems Engineering. Testing and simulation of such models can provide early feedback about design choices. However, in today's complex systems, failures could arise due to subtle errors that are hard to find without checking all possible execution paths. Formal methods, and especially model checking can uncover such subtle errors, yet their usage in practice is limited due to the specialized expertise and high computing power required. Therefore we created an automated, cloud-based environment that can verify complex reachability properties on SysML State Machines using hidden model checkers. The approach and the prototype is illustrated using an example from the aerospace domain.},
 }
+
+@phdthesis{hajdua2020phd,
+    author = {\'Akos Hajdu},
+    title  = {Effective Domain-Specific Formal Verification Techniques},
+    school = {Budapest University of Technology and Economics},
+    year   = {2020},
+	doi    = {10.5281/zenodo.3892347}
+	
+	type   = {Thesis},
+	
+	url_pdf = {https://repozitorium.omikk.bme.hu/bitstream/handle/10890/13523/ertekezes.pdf},
+	url_link = {https://repozitorium.omikk.bme.hu/handle/10890/13523},
+	abstract = {
+Formal verification techniques allow rigorous reasoning about the operation of computer systems and programs. With a sound and complete mathematical basis, it is both possible to show the presence of certain kinds of errors and to prove their absence. Formal methods are often applied in critical domains (\eg industrial controllers) to increase quality and trust in their correct operation. However, most of the interesting questions to be analyzed are computationally complex or undecidable in general. Therefore, verification approaches in different problem domains usually put more emphasis on different properties of the analysis to achieve a reasonable trade-off. Such properties include (1) expressive power (2) efficiency, and (3) the amount of conclusive answers. This work addresses challenges related to the properties mentioned above in three different problem domains using different approaches to make verification effective.
+Thesis 1 targets concurrent and asynchronous systems by modeling them with Petri nets and checking the reachability of a given state. We study an existing algorithm that uses an efficient structural over-approximation. However, the expressive power is limited to simple reachability properties and the algorithm can easily give inconclusive answers due to its iteration strategy. We lift the expressive power of the algorithm by handling a generalized version of reachability and supporting Petri nets extended with inhibitor arcs. We increase the number of conclusive answers by the algorithm via a new iteration approach on invariants and a hybrid search strategy.
+Thesis 2 targets embedded software code by modeling them with control-flow automata and checking the reachability of a distinguished error location. We study abstraction-refinement-based model checking where efficiency is still a significant limitation due to the complexity of the programs and the rich domains of their variables. We propose various efficient strategies for both abstraction and refinement. For abstraction, we extend the explicit-value analysis with limited successor enumeration, and we adapt structural information from the program to guide the search more efficiently. For refinement, we develop a backward-search based interpolation strategy and an approach that uses multiple counterexamples for a faster convergence to the appropriate level of abstraction.
+Thesis 3 targets decentralized, blockchain-based systems by translating contracts (programs running on such systems) to an intermediate verification language. We adapt existing modular specification constructs to this context and also propose domain-specific properties. This provides a flexible and expressive approach to specify high-level, functional properties of contracts. We define a translation from contracts to the Boogie intermediate verification language, and leverage existing modular verification approaches. Furthermore, we develop a modular encoding of arithmetic that can capture operations precisely and efficiently over large bit-widths that are common in this domain.
+All contributions have been implemented in practical tools and are available publicly. We also evaluate our contributions on various synthetic and real-world examples to prove their applicability. Results show that our contributions successfully address the targeted challenges and provide effective verification approaches in general.
+	},
+}
