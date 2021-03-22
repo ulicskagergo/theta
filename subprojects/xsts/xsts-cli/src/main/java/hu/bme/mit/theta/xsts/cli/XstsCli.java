@@ -17,6 +17,7 @@ import hu.bme.mit.theta.common.table.TableWriter;
 import hu.bme.mit.theta.solver.z3.Z3SolverFactory;
 import hu.bme.mit.theta.xsts.XSTS;
 import hu.bme.mit.theta.xsts.analysis.XstsAction;
+import hu.bme.mit.theta.xsts.analysis.XstsArgMetrics;
 import hu.bme.mit.theta.xsts.analysis.XstsState;
 import hu.bme.mit.theta.xsts.analysis.concretizer.XstsStateSequence;
 import hu.bme.mit.theta.xsts.analysis.concretizer.XstsTraceConcretizerUtil;
@@ -86,6 +87,9 @@ public class XstsCli {
 	@Parameter(names = "--metrics", description = "Print metrics about the XSTS without running the algorithm")
 	boolean metrics = false;
 
+	@Parameter(names = "--argmetrics", description = "Export metrics from the abstract reachability graph")
+	boolean argMetrics = false;
+
 	@Parameter(names = "--stacktrace", description = "Print full stack trace in case of exception")
 	boolean stacktrace = false;
 
@@ -141,6 +145,12 @@ public class XstsCli {
 			if (status.isUnsafe() && cexfile != null) {
 				writeCex(status.asUnsafe(), xsts);
 			}
+
+			if (argMetrics) {
+				XstsArgMetrics xstsArgMetrics = new XstsArgMetrics(status.getArg(), xsts);
+				xstsArgMetrics.getMetrics();
+			}
+
 		} catch (final Throwable ex) {
 			printError(ex);
 			System.exit(1);
