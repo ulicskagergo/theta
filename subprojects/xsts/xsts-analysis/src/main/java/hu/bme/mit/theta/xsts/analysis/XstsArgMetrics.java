@@ -34,14 +34,15 @@ public class XstsArgMetrics {
 	private final ARG<? extends State, ? extends Action> arg;
 	final XSTS xsts;
 	final List<VarDecl<?>> ctrlVars;
-	final List<VarDecl<?>> vars;
+	final List<VarDecl<?>> notCrtlVars;
 	private final Map<String, Map<String, String>> metrics;
 
 	public XstsArgMetrics(ARG<? extends State, ? extends Action> arg, XSTS xsts){
 		this.arg = arg;
 		this.xsts = xsts;
 		this.ctrlVars = new ArrayList<>(xsts.getCtrlVars());
-		this.vars = new ArrayList<>(xsts.getVars());
+		this.notCrtlVars = new ArrayList<>(xsts.getVars());
+		notCrtlVars.removeAll(ctrlVars);
 		this.metrics = new HashMap<>();
 	}
 
@@ -52,23 +53,23 @@ public class XstsArgMetrics {
 			if (argNode.getState() instanceof XstsState<?>) {
 				XstsState<?> xstsState = (XstsState<?>) argNode.getState();
 				if (!xstsState.lastActionWasEnv()) {
-					Valuation valuation = extractInnerState(xstsState);
-					//addStat(valuation, "variable_placeholder", "value_placeholder");
-					getVariableValues(valuation);
+					Valuation ctrlValuation = extractCtrlValuation(xstsState);
+					Valuation wholeValuation = extractWholeValuation(xstsState);
+					getVariableValues(ctrlValuation, wholeValuation);
 				}
 			}
 		}
 		serializer();
 	}
 
-	private void getVariableValues(Valuation valuation) {
-		for (VarDecl<?> var : vars) {
-			Optional<? extends LitExpr<?>> eval = valuation.eval(var);
-			eval.ifPresent(litExpr -> addStat(valuation, var.getName(), litExpr.toString()));
+	private void getVariableValues(Valuation ctrlValuation, Valuation wholeValuation) {
+		for (VarDecl<?> var : notCrtlVars) {
+			Optional<? extends LitExpr<?>> eval = wholeValuation.eval(var);
+			eval.ifPresent(litExpr -> addStat(ctrlValuation, var.getName(), litExpr.toString()));
 		}
 	}
 
-	private Valuation extractInnerState(XstsState<?> xstsState) {
+	private Valuation extractWholeValuation(XstsState<?> xstsState) {
 		final ImmutableValuation.Builder builder = ImmutableValuation.builder();	//kulcs
 		ExprState innerState = xstsState.getState();
 
@@ -76,46 +77,100 @@ public class XstsArgMetrics {
 			System.out.println("[ ERROR ] We cannot work with predicate abstraction.");
 		} else if (innerState instanceof ExplState) {
 			ExplState explState = (ExplState) innerState;
-			buildImmutableValuation(explState, builder);
+			buildWholeValuation(explState, builder);
 		} else if (innerState instanceof Prod2State) {
 			if (((Prod2State<?, ?>) innerState).getState1() instanceof ExplState) {
 				ExplState explState = (ExplState) ((Prod2State<?, ?>) innerState).getState1();
-				buildImmutableValuation(explState, builder);
+				buildWholeValuation(explState, builder);
 			} else if (((Prod2State<?, ?>) innerState).getState2() instanceof ExplState){
 				ExplState explState = (ExplState) ((Prod2State<?, ?>) innerState).getState2();
-				buildImmutableValuation(explState, builder);
+				buildWholeValuation(explState, builder);
 			}
 		} else if (innerState instanceof Prod3State) {
 			if(((Prod3State<?, ?, ?>) innerState).getState1() instanceof ExplState) {
 				ExplState explState = (ExplState) ((Prod3State<?, ?, ?>) innerState).getState1();
-				buildImmutableValuation(explState, builder);
+				buildWholeValuation(explState, builder);
 			} else if (((Prod3State<?, ?, ?>) innerState).getState2() instanceof ExplState) {
 				ExplState explState = (ExplState) ((Prod3State<?, ?, ?>) innerState).getState2();
-				buildImmutableValuation(explState, builder);
+				buildWholeValuation(explState, builder);
 			} else if (((Prod3State<?, ?, ?>) innerState).getState3() instanceof ExplState){
 				ExplState explState = (ExplState) ((Prod3State<?, ?, ?>) innerState).getState3();
-				buildImmutableValuation(explState, builder);
+				buildWholeValuation(explState, builder);
 			}
 		} else if (innerState instanceof Prod4State) {
 			if (((Prod4State<?, ?, ?, ?>) innerState).getState1() instanceof ExplState) {
 				ExplState explState = (ExplState) ((Prod4State<?, ?, ?, ?>) innerState).getState1();
-				buildImmutableValuation(explState, builder);
+				buildWholeValuation(explState, builder);
 			} else if (((Prod4State<?, ?, ?, ?>) innerState).getState2() instanceof ExplState) {
 				ExplState explState = (ExplState) ((Prod4State<?, ?, ?, ?>) innerState).getState2();
-				buildImmutableValuation(explState, builder);
+				buildWholeValuation(explState, builder);
 			} else if (((Prod4State<?, ?, ?, ?>) innerState).getState3() instanceof ExplState) {
 				ExplState explState = (ExplState) ((Prod4State<?, ?, ?, ?>) innerState).getState3();
-				buildImmutableValuation(explState, builder);
+				buildWholeValuation(explState, builder);
 			} else if (((Prod4State<?, ?, ?, ?>) innerState).getState4() instanceof ExplState) {
 				ExplState explState = (ExplState) ((Prod4State<?, ?, ?, ?>) innerState).getState4();
-				buildImmutableValuation(explState, builder);
+				buildWholeValuation(explState, builder);
 			}
 		}
 
 		return builder.build();
 	}
 
-	private void buildImmutableValuation(ExplState explState, ImmutableValuation.Builder builder) {
+	private void buildWholeValuation(ExplState explState, ImmutableValuation.Builder builder) {
+		for (VarDecl<?> ctrlVar : notCrtlVars) {
+			Optional<? extends LitExpr<?>> eval = explState.eval(ctrlVar);
+			eval.ifPresent(litExpr -> builder.put(ctrlVar, litExpr));
+		}
+	}
+
+	private Valuation extractCtrlValuation(XstsState<?> xstsState) {
+		final ImmutableValuation.Builder builder = ImmutableValuation.builder();	//kulcs
+		ExprState innerState = xstsState.getState();
+
+		if (innerState instanceof PredState) {
+			System.out.println("[ ERROR ] We cannot work with predicate abstraction.");
+		} else if (innerState instanceof ExplState) {
+			ExplState explState = (ExplState) innerState;
+			buildCtrlValuation(explState, builder);
+		} else if (innerState instanceof Prod2State) {
+			if (((Prod2State<?, ?>) innerState).getState1() instanceof ExplState) {
+				ExplState explState = (ExplState) ((Prod2State<?, ?>) innerState).getState1();
+				buildCtrlValuation(explState, builder);
+			} else if (((Prod2State<?, ?>) innerState).getState2() instanceof ExplState){
+				ExplState explState = (ExplState) ((Prod2State<?, ?>) innerState).getState2();
+				buildCtrlValuation(explState, builder);
+			}
+		} else if (innerState instanceof Prod3State) {
+			if(((Prod3State<?, ?, ?>) innerState).getState1() instanceof ExplState) {
+				ExplState explState = (ExplState) ((Prod3State<?, ?, ?>) innerState).getState1();
+				buildCtrlValuation(explState, builder);
+			} else if (((Prod3State<?, ?, ?>) innerState).getState2() instanceof ExplState) {
+				ExplState explState = (ExplState) ((Prod3State<?, ?, ?>) innerState).getState2();
+				buildCtrlValuation(explState, builder);
+			} else if (((Prod3State<?, ?, ?>) innerState).getState3() instanceof ExplState){
+				ExplState explState = (ExplState) ((Prod3State<?, ?, ?>) innerState).getState3();
+				buildCtrlValuation(explState, builder);
+			}
+		} else if (innerState instanceof Prod4State) {
+			if (((Prod4State<?, ?, ?, ?>) innerState).getState1() instanceof ExplState) {
+				ExplState explState = (ExplState) ((Prod4State<?, ?, ?, ?>) innerState).getState1();
+				buildCtrlValuation(explState, builder);
+			} else if (((Prod4State<?, ?, ?, ?>) innerState).getState2() instanceof ExplState) {
+				ExplState explState = (ExplState) ((Prod4State<?, ?, ?, ?>) innerState).getState2();
+				buildCtrlValuation(explState, builder);
+			} else if (((Prod4State<?, ?, ?, ?>) innerState).getState3() instanceof ExplState) {
+				ExplState explState = (ExplState) ((Prod4State<?, ?, ?, ?>) innerState).getState3();
+				buildCtrlValuation(explState, builder);
+			} else if (((Prod4State<?, ?, ?, ?>) innerState).getState4() instanceof ExplState) {
+				ExplState explState = (ExplState) ((Prod4State<?, ?, ?, ?>) innerState).getState4();
+				buildCtrlValuation(explState, builder);
+			}
+		}
+
+		return builder.build();
+	}
+
+	private void buildCtrlValuation(ExplState explState, ImmutableValuation.Builder builder) {
 		for (VarDecl<?> ctrlVar : ctrlVars) {
 			Optional<? extends LitExpr<?>> eval = explState.eval(ctrlVar);
 			eval.ifPresent(litExpr -> builder.put(ctrlVar, litExpr));
