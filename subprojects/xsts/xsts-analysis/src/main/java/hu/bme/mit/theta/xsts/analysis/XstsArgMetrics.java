@@ -35,7 +35,7 @@ public class XstsArgMetrics {
 	final XSTS xsts;
 	final List<VarDecl<?>> ctrlVars;
 	final List<VarDecl<?>> notCrtlVars;
-	private final Map<String, Map<String, String>> metrics;
+	private final Map<Map<String, String>, Map<String, String>> metrics;
 
 	public XstsArgMetrics(ARG<? extends State, ? extends Action> arg, XSTS xsts){
 		this.arg = arg;
@@ -179,7 +179,7 @@ public class XstsArgMetrics {
 
 	private void addStat(Valuation ctrlStateVector, String variable, String value) {
 		Map<String, String> varVal = new HashMap<>();
-		String keyVector = vectorToString(ctrlStateVector);
+		Map<String, String> keyVector = vectorToString(ctrlStateVector);
 
 		if (metrics.containsKey(keyVector)) {												// vector already defined
 			varVal = metrics.get(keyVector);
@@ -202,7 +202,8 @@ public class XstsArgMetrics {
 		}
 	}
 
-	private String vectorToString(Valuation ctrlStateVector) {
+	private Map<String, String> vectorToString(Valuation ctrlStateVector) {
+		Map<String, String> vector = new HashMap<>();
 		for (VarDecl<?> ctrlVar : ctrlVars) {
 			Optional<? extends LitExpr<?>> eval = ctrlStateVector.eval(ctrlVar);
 			if (eval.isPresent()) {
@@ -213,22 +214,33 @@ public class XstsArgMetrics {
 							.filter(symbol -> symbol.getIntValue().equals(intValue.getValue()))
 							.findFirst();
 					assert optSymbol.isPresent();
-					return String.format("(%s %s)", ctrlVar.getName(), optSymbol.get().getName());
+					vector.put(ctrlVar.getName(), optSymbol.get().getName());
 				} else {
-					return String.format("(%s %s)", ctrlVar.getName(), eval.get());
+					vector.put(ctrlVar.getName(), eval.get().toString());
 				}
 			}
 		}
-		throw new RuntimeException("[ Error ] Vector changed in meanwhile");
+		return vector;
 	}
 
 	private void serializer(){
 		JsonObjectBuilder builder = Json.createObjectBuilder();
-		for(Map.Entry<String, Map<String, String>> entry : metrics.entrySet()){
-			JsonObjectBuilder inside = Json.createObjectBuilder();
-			for(Map.Entry<String, String> insideEntry : entry.getValue().entrySet())
-				inside.add(insideEntry.getKey(), insideEntry.getValue());
-			builder.add(entry.getKey(), inside);
+		for (Map.Entry<Map<String, String>, Map<String, String>> entry : metrics.entrySet()){
+			JsonObjectBuilder first = Json.createObjectBuilder();
+			for (Map.Entry<String, String> firstEntry : entry.getValue().entrySet()) {
+				first.add(firstEntry.getKey(), firstEntry.getValue());
+				if (DEBUG_MODE) {
+					System.out.println("[ DEBUG ] KEY " + firstEntry.getKey() + " " + firstEntry.getValue());
+				}
+			}
+			JsonObjectBuilder second = Json.createObjectBuilder();
+			for (Map.Entry<String, String> secondEntry : entry.getKey().entrySet()){
+				second.add(secondEntry.getKey(), secondEntry.getValue());
+				if (DEBUG_MODE) {
+					System.out.println("[ DEBUG ] VAL " + secondEntry.getKey() + " " + secondEntry.getValue());
+				}
+			}
+			builder.add(second.build().toString(), first);
 		}
 		JsonObject o = builder.build();
 
