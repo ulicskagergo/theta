@@ -1,4 +1,4 @@
-package hu.bme.mit.theta.xsts.analysis;
+package hu.bme.mit.theta.xsts.analysis.argmetrics;
 
 import hu.bme.mit.theta.analysis.Action;
 import hu.bme.mit.theta.analysis.State;
@@ -13,9 +13,12 @@ import hu.bme.mit.theta.analysis.prod4.Prod4State;
 import hu.bme.mit.theta.core.decl.VarDecl;
 import hu.bme.mit.theta.core.model.ImmutableValuation;
 import hu.bme.mit.theta.core.model.Valuation;
+import hu.bme.mit.theta.core.type.Expr;
 import hu.bme.mit.theta.core.type.LitExpr;
+import hu.bme.mit.theta.core.type.booltype.BoolType;
 import hu.bme.mit.theta.core.type.inttype.IntLitExpr;
 import hu.bme.mit.theta.xsts.XSTS;
+import hu.bme.mit.theta.xsts.analysis.XstsState;
 import hu.bme.mit.theta.xsts.dsl.XstsTypeDeclSymbol;
 
 import java.util.*;
@@ -34,15 +37,15 @@ public class XstsArgMetrics {
 	private final ARG<? extends State, ? extends Action> arg;
 	final XSTS xsts;
 	final List<VarDecl<?>> ctrlVars;
-	final List<VarDecl<?>> notCrtlVars;
+	final List<VarDecl<?>> notCtrlVars;
 	private final Map<Map<String, String>, Map<String, String>> metrics;
 
 	public XstsArgMetrics(ARG<? extends State, ? extends Action> arg, XSTS xsts){
 		this.arg = arg;
 		this.xsts = xsts;
 		this.ctrlVars = new ArrayList<>(xsts.getCtrlVars());
-		this.notCrtlVars = new ArrayList<>(xsts.getVars());
-		notCrtlVars.removeAll(ctrlVars);
+		this.notCtrlVars = new ArrayList<>(xsts.getVars());
+		notCtrlVars.removeAll(ctrlVars);
 		this.metrics = new HashMap<>();
 	}
 
@@ -55,26 +58,42 @@ public class XstsArgMetrics {
 				if (!xstsState.lastActionWasEnv()) {
 					Valuation ctrlValuation = extractCtrlValuation(xstsState);
 					Valuation wholeValuation = extractWholeValuation(xstsState);
-					getVariableValues(ctrlValuation, wholeValuation);
+					if (wholeValuation == null) {
+						getVariablePreds(ctrlValuation, xstsState);
+					} else {
+						getVariableValues(ctrlValuation, wholeValuation);
+					}
 				}
 			}
 		}
 		serializer();
 	}
 
+	private void getVariablePreds(Valuation ctrlValuation, XstsState<?> xstsState) {
+		PredState predState = (PredState)xstsState.getState();
+		addStat(ctrlValuation, predState.toString(), "");
+	}
+
 	private void getVariableValues(Valuation ctrlValuation, Valuation wholeValuation) {
-		for (VarDecl<?> var : notCrtlVars) {
+		for (VarDecl<?> var : notCtrlVars) {
 			Optional<? extends LitExpr<?>> eval = wholeValuation.eval(var);
 			eval.ifPresent(litExpr -> addStat(ctrlValuation, var.getName(), litExpr.toString()));
 		}
 	}
 
+	/**
+	 * Whole valuation extractor
+	 * @param xstsState input state
+	 * @return			extracted valuation
+	 */
 	private Valuation extractWholeValuation(XstsState<?> xstsState) {
-		final ImmutableValuation.Builder builder = ImmutableValuation.builder();	//kulcs
+		final ImmutableValuation.Builder builder = ImmutableValuation.builder();
 		ExprState innerState = xstsState.getState();
 
 		if (innerState instanceof PredState) {
-			System.out.println("[ ERROR ] We cannot work with predicate abstraction.");
+			// TODO implement PredState extraction
+			return null;
+			//System.out.println("[ ERROR ] We cannot work with predicate abstraction.");
 		} else if (innerState instanceof ExplState) {
 			ExplState explState = (ExplState) innerState;
 			buildWholeValuation(explState, builder);
@@ -117,14 +136,19 @@ public class XstsArgMetrics {
 	}
 
 	private void buildWholeValuation(ExplState explState, ImmutableValuation.Builder builder) {
-		for (VarDecl<?> ctrlVar : notCrtlVars) {
-			Optional<? extends LitExpr<?>> eval = explState.eval(ctrlVar);
-			eval.ifPresent(litExpr -> builder.put(ctrlVar, litExpr));
+		for (VarDecl<?> notCtrlVar : notCtrlVars) {
+			Optional<? extends LitExpr<?>> eval = explState.eval(notCtrlVar);
+			eval.ifPresent(litExpr -> builder.put(notCtrlVar, litExpr));
 		}
 	}
 
+	/**
+	 * Control state valuation extractor
+	 * @param xstsState input state
+	 * @return			extracted valuation
+	 */
 	private Valuation extractCtrlValuation(XstsState<?> xstsState) {
-		final ImmutableValuation.Builder builder = ImmutableValuation.builder();	//kulcs
+		final ImmutableValuation.Builder builder = ImmutableValuation.builder();
 		ExprState innerState = xstsState.getState();
 
 		if (innerState instanceof PredState) {
