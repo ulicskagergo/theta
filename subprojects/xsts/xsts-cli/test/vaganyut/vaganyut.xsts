@@ -1,0 +1,800 @@
+type J_jelzes_t : { SOTET, MEGALLJ, SZABAD}
+type valasz_t : { SIKERES, ELUTASITVA}
+type VU_tip_t : { VONAT, TOLATO}
+type J_tipus_t : { FOJELZO, TOLATASJELZO, EGYESITETT}
+type F_VU_lez_reg_Jelzo : { __Inactive__, F_VU_lez_Inputra_Var, F_VU_lez_Valaszra_Var}
+type V_ell_t : { JOBB_VEGALLAS, BAL_VEGALLAS, NINCS_S, JOBB_ELVESZTETT, BAL_ELVESZTETT, FELVAGAS, ALLITAS}
+type fogl_t : { SZABAD_F, FOGLALT, HIBAS, RESET}
+type V_vezer_t : { JOBB, BAL}
+type V_VU_lez_t : { NINCS, ELOLROL, GYOKFELOL}
+type Trigger_OV_keres_reg_Valto : { __Inactive__, Trigger_OV_keres_Inputra_Var, Trigger_OV_keres_Valaszra_VarB, Trigger_OV_keres_Valaszra_VarJ}
+type E_VU_lez_reg_Valto : { __Inactive__, E_VU_lez_Inputra_Var, E_VU_lez_J_Valaszra_Var, E_VU_lez_B_Valaszra_Var}
+type C_VU_lez_reg_Jelzo : { __Inactive__, C_VU_lez_Inputra_Var, C_VU_lez_Valaszra_Var}
+type B_VU_lez_reg_Valto : { __Inactive__, B_VU_lez_Inputra_Var, B_VU_lez_Valaszra_Var}
+type S_VU_lez_reg_Jelzo : { __Inactive__, S_VU_Inputra_Var, S_VU_Valaszra_Var}
+var A_AI_jelzes_In_fojelzo : boolean = false
+var A_AI_jelzes_In_AI_jelzesValue_fojelzo : J_jelzes_t = SOTET
+var F_VU_lez_ker_In_fojelzo : boolean = false
+var F_VU_lez_ker_In_ker_VU_tip_fojelzo : VU_tip_t = VONAT
+var C_VU_lez_In_ker_In_ker_VU_tip_fojelzo : VU_tip_t = VONAT
+var F_VU_lez_val_Out_fojelzo : boolean = false
+var F_VU_lez_val_Out_val_VU_tip_fojelzo : valasz_t = SIKERES
+var F_VU_lez_val_Out_obj_id_fojelzo : integer = 0
+var S_VU_lez_Out_val_In_fojelzo : boolean = false
+var S_VU_lez_Out_val_In_val_VU_tip_fojelzo : valasz_t = SIKERES
+var S_VU_lez_Out_val_In_obj_id_fojelzo : integer = 0
+ctrl var f_VU_lez_reg_fojelzo : F_VU_lez_reg_Jelzo = __Inactive__
+var BA_T_lez_fojelzo : boolean = false
+var VU_tip_fojelzo : VU_tip_t = VONAT
+var BA_S_lez_fojelzo : boolean = false
+var BA_S_VU_tip_fojelzo : VU_tip_t = VONAT
+var BA_T_VU_tip_fojelzo : VU_tip_t = VONAT
+var BA_A_lez_fojelzo : boolean = false
+var A_AI_ell_In_valto0 : boolean = false
+var A_AI_ell_In_AI_ellValue_valto0 : V_ell_t = JOBB_VEGALLAS
+var B_VU_lez_Out_val_In_valto0 : boolean = false
+var B_VU_lez_Out_val_In_val_VU_tip_valto0 : valasz_t = SIKERES
+var B_VU_lez_Out_val_In_obj_id_valto0 : integer = 0
+var E_VU_lez_In_ker_In_valto0 : boolean = false
+var E_VU_lez_In_ker_In_ker_VU_tip_valto0 : VU_tip_t = VONAT
+ctrl var trigger_OV_keres_reg_valto0 : Trigger_OV_keres_reg_Valto = __Inactive__
+ctrl var e_VU_lez_reg_valto0 : E_VU_lez_reg_Valto = __Inactive__
+var BA_vezer_valto0 : V_vezer_t = JOBB
+var BA_VU_lez_valto0 : V_VU_lez_t = NINCS
+var A_AI_jelzes_In_AI_jelzesValue_tolatasjelzo : J_jelzes_t = SOTET
+var S_VU_lez_Out_val_In_tolatasjelzo : boolean = false
+var S_VU_lez_Out_val_In_val_VU_tip_tolatasjelzo : valasz_t = SIKERES
+var S_VU_lez_Out_val_In_obj_id_tolatasjelzo : integer = 0
+var C_VU_lez_In_ker_In_tolatasjelzo : boolean = false
+var C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo : VU_tip_t = VONAT
+ctrl var c_VU_lez_reg_tolatasjelzo : C_VU_lez_reg_Jelzo = __Inactive__
+var BA_T_VU_tip_tolatasjelzo : VU_tip_t = VONAT
+var BA_celkiz_tolatasjelzo : boolean = false
+var BA_C_VU_tip_tolatasjelzo : VU_tip_t = VONAT
+var BA_A_lez_tolatasjelzo : boolean = false
+var BA_S_VU_tip_tolatasjelzo : VU_tip_t = VONAT
+var VU_tip_tolatasjelzo : VU_tip_t = VONAT
+var BA_S_lez_tolatasjelzo : boolean = false
+var BA_C_lez_tolatasjelzo : boolean = false
+var BA_T_lez_tolatasjelzo : boolean = false
+var A_AI_ell_In_valto1 : boolean = false
+var A_AI_ell_In_AI_ellValue_valto1 : V_ell_t = JOBB_VEGALLAS
+var B_VU_lez_Out_val_In_valto1 : boolean = false
+var B_VU_lez_Out_val_In_val_VU_tip_valto1 : valasz_t = SIKERES
+var B_VU_lez_Out_val_In_obj_id_valto1 : integer = 0
+var E_VU_lez_In_ker_In_valto1 : boolean = false
+var E_VU_lez_In_ker_In_ker_VU_tip_valto1 : VU_tip_t = VONAT
+ctrl var e_VU_lez_reg_valto1 : E_VU_lez_reg_Valto = __Inactive__
+ctrl var trigger_OV_keres_reg_valto1 : Trigger_OV_keres_reg_Valto = __Inactive__
+var BA_vezer_valto1 : V_vezer_t = JOBB
+var BA_VU_lez_valto1 : V_VU_lez_t = NINCS
+var B_VU_lez_In_ker_In_valto2 : boolean = false
+var B_VU_lez_In_ker_In_ker_VU_tip_valto2 : VU_tip_t = VONAT
+var E_VU_lez_Out_val_In_valto2 : boolean = false
+var E_VU_lez_Out_val_In_val_VU_tip_valto2 : valasz_t = SIKERES
+var E_VU_lez_Out_val_In_obj_id_valto2 : integer = 0
+var A_AI_ell_In_valto2 : boolean = false
+var A_AI_ell_In_AI_ellValue_valto2 : V_ell_t = JOBB_VEGALLAS
+ctrl var b_VU_lez_reg_valto2 : B_VU_lez_reg_Valto = __Inactive__
+ctrl var trigger_OV_keres_reg_valto2 : Trigger_OV_keres_reg_Valto = __Inactive__
+var BA_vezer_valto2 : V_vezer_t = JOBB
+var BA_VU_lez_valto2 : V_VU_lez_t = NINCS
+var S_VU_lez_In_ker_In_atmenetjelzo : boolean = false
+var S_VU_lez_In_ker_In_ker_VU_tip_atmenetjelzo : VU_tip_t = VONAT
+var C_VU_lez_Out_val_In_atmenetjelzo : boolean = false
+var C_VU_lez_Out_val_In_val_VU_tip_atmenetjelzo : valasz_t = SIKERES
+var C_VU_lez_Out_val_In_obj_id_atmenetjelzo : integer = 0
+ctrl var s_VU_lez_reg_atmenetjelzo : S_VU_lez_reg_Jelzo = __Inactive__
+var BA_A_VU_tip_atmenetjelzo : VU_tip_t = VONAT
+var BA_S_lez_atmenetjelzo : boolean = false
+var BA_C_lez_atmenetjelzo : boolean = false
+var VU_tip_atmenetjelzo : VU_tip_t = VONAT
+var BA_A_lez_atmenetjelzo : boolean = false
+var BA_T_lez_atmenetjelzo : boolean = false
+var C_VU_lez_In_ker_In_celjelzo : boolean = false
+var C_VU_lez_In_ker_In_ker_VU_tip_celjelzo : VU_tip_t = VONAT
+var A_AI_jelzes_In_celjelzo : boolean = false
+var A_AI_jelzes_In_AI_jelzesValue_celjelzo : J_jelzes_t = SOTET
+ctrl var c_VU_lez_reg_celjelzo : C_VU_lez_reg_Jelzo = __Inactive__
+var BA_T_lez_celjelzo : boolean = false
+var BA_A_lez_celjelzo : boolean = false
+var BA_C_VU_tip_celjelzo : VU_tip_t = VONAT
+var BA_celkiz_celjelzo : boolean = false
+var BA_C_lez_celjelzo : boolean = false
+var _F_VU_lez_val_Out_obj_id_fojelzo_ : integer
+var _E_VU_lez_In_ker_In_ker_VU_tip_valto0_ : VU_tip_t
+var _F_VU_lez_val_Out_fojelzo_ : boolean
+var _E_VU_lez_In_ker_In_valto0_ : boolean
+var _F_VU_lez_val_Out_val_VU_tip_fojelzo_ : valasz_t
+var _S_VU_lez_Out_val_In_val_VU_tip_fojelzo_ : valasz_t
+var _C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo_ : VU_tip_t
+var _C_VU_lez_In_ker_In_tolatasjelzo_ : boolean
+var _S_VU_lez_Out_val_In_fojelzo_ : boolean
+var _S_VU_lez_Out_val_In_obj_id_fojelzo_ : integer
+var _E_VU_lez_In_ker_In_ker_VU_tip_valto1_ : VU_tip_t
+var _B_VU_lez_Out_val_In_val_VU_tip_valto0_ : valasz_t
+var _B_VU_lez_Out_val_In_obj_id_valto0_ : integer
+var _B_VU_lez_Out_val_In_valto0_ : boolean
+var _E_VU_lez_In_ker_In_valto1_ : boolean
+var _S_VU_lez_Out_val_In_tolatasjelzo_ : boolean
+var _S_VU_lez_Out_val_In_val_VU_tip_tolatasjelzo_ : valasz_t
+var _B_VU_lez_In_ker_In_ker_VU_tip_valto2_ : VU_tip_t
+var _B_VU_lez_In_ker_In_valto2_ : boolean
+var _S_VU_lez_Out_val_In_obj_id_tolatasjelzo_ : integer
+var _B_VU_lez_Out_val_In_obj_id_valto1_ : integer
+var _S_VU_lez_In_ker_In_atmenetjelzo_ : boolean
+var _B_VU_lez_Out_val_In_val_VU_tip_valto1_ : valasz_t
+var _B_VU_lez_Out_val_In_valto1_ : boolean
+var _S_VU_lez_In_ker_In_ker_VU_tip_atmenetjelzo_ : VU_tip_t
+var _C_VU_lez_In_ker_In_celjelzo_ : boolean
+var _E_VU_lez_Out_val_In_valto2_ : boolean
+var _E_VU_lez_Out_val_In_obj_id_valto2_ : integer
+var _E_VU_lez_Out_val_In_val_VU_tip_valto2_ : valasz_t
+var _C_VU_lez_In_ker_In_ker_VU_tip_celjelzo_ : VU_tip_t
+var _C_VU_lez_Out_val_In_obj_id_atmenetjelzo_ : integer
+var _C_VU_lez_Out_val_In_val_VU_tip_atmenetjelzo_ : valasz_t
+var _C_VU_lez_Out_val_In_atmenetjelzo_ : boolean
+
+trans {
+	_E_VU_lez_In_ker_In_ker_VU_tip_valto0_ := E_VU_lez_In_ker_In_ker_VU_tip_valto0;
+	_C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo_ := C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo;
+	_E_VU_lez_In_ker_In_ker_VU_tip_valto1_ := E_VU_lez_In_ker_In_ker_VU_tip_valto1;
+	_B_VU_lez_In_ker_In_ker_VU_tip_valto2_ := B_VU_lez_In_ker_In_ker_VU_tip_valto2;
+	_S_VU_lez_In_ker_In_ker_VU_tip_atmenetjelzo_ := S_VU_lez_In_ker_In_ker_VU_tip_atmenetjelzo;
+	_C_VU_lez_In_ker_In_ker_VU_tip_celjelzo_ := C_VU_lez_In_ker_In_ker_VU_tip_celjelzo;
+	_F_VU_lez_val_Out_val_VU_tip_fojelzo_ := SIKERES;
+	_E_VU_lez_In_ker_In_valto0_ := false;
+	_F_VU_lez_val_Out_obj_id_fojelzo_ := 0;
+	_F_VU_lez_val_Out_fojelzo_ := false;
+	choice {
+		assume (((f_VU_lez_reg_fojelzo == F_VU_lez_Inputra_Var) && (F_VU_lez_ker_In_fojelzo == true)));
+		f_VU_lez_reg_fojelzo := __Inactive__;
+		choice {
+			assume (((F_VU_lez_ker_In_ker_VU_tip_fojelzo == VONAT) && ((FOJELZO == FOJELZO) || (FOJELZO == EGYESITETT))) || ((F_VU_lez_ker_In_ker_VU_tip_fojelzo == TOLATO) && ((FOJELZO == TOLATASJELZO) || (FOJELZO == EGYESITETT)) && (!(BA_S_lez_fojelzo)) && (!(BA_A_lez_fojelzo)) && (!(BA_T_lez_fojelzo)) && (A_AI_jelzes_In_AI_jelzesValue_fojelzo == MEGALLJ)));
+			VU_tip_fojelzo := F_VU_lez_ker_In_ker_VU_tip_fojelzo;
+			_E_VU_lez_In_ker_In_ker_VU_tip_valto0_ := VU_tip_fojelzo;
+			_E_VU_lez_In_ker_In_valto0_ := true;
+			f_VU_lez_reg_fojelzo := F_VU_lez_Valaszra_Var;
+		} or {
+			assume ((!(((((F_VU_lez_ker_In_ker_VU_tip_fojelzo == VONAT) && ((FOJELZO == FOJELZO) || (FOJELZO == EGYESITETT))) || ((F_VU_lez_ker_In_ker_VU_tip_fojelzo == TOLATO) && ((FOJELZO == TOLATASJELZO) || (FOJELZO == EGYESITETT)) && (!(BA_S_lez_fojelzo)) && (!(BA_A_lez_fojelzo)) && (!(BA_T_lez_fojelzo)) && (A_AI_jelzes_In_AI_jelzesValue_fojelzo == MEGALLJ)))))));
+			_F_VU_lez_val_Out_val_VU_tip_fojelzo_ := ELUTASITVA;
+			_F_VU_lez_val_Out_obj_id_fojelzo_ := 0;
+			_F_VU_lez_val_Out_fojelzo_ := true;
+			f_VU_lez_reg_fojelzo := F_VU_lez_Inputra_Var;
+		}
+	} or {
+		assume (((f_VU_lez_reg_fojelzo == F_VU_lez_Valaszra_Var) && (S_VU_lez_Out_val_In_fojelzo == true)));
+		f_VU_lez_reg_fojelzo := __Inactive__;
+		choice {
+			assume (S_VU_lez_Out_val_In_val_VU_tip_fojelzo == SIKERES);
+			choice {
+				assume (((C_VU_lez_In_ker_In_ker_VU_tip_fojelzo == VONAT) && ((FOJELZO == FOJELZO) || (FOJELZO == EGYESITETT))) || ((C_VU_lez_In_ker_In_ker_VU_tip_fojelzo == TOLATO) && ((FOJELZO == TOLATASJELZO) || (FOJELZO == EGYESITETT))));
+				BA_S_lez_fojelzo := true;
+				BA_S_VU_tip_fojelzo := VU_tip_fojelzo;
+				_F_VU_lez_val_Out_val_VU_tip_fojelzo_ := SIKERES;
+				_F_VU_lez_val_Out_obj_id_fojelzo_ := S_VU_lez_Out_val_In_obj_id_fojelzo;
+				_F_VU_lez_val_Out_fojelzo_ := true;
+				f_VU_lez_reg_fojelzo := F_VU_lez_Inputra_Var;
+			} or {
+				assume ((!(((((C_VU_lez_In_ker_In_ker_VU_tip_fojelzo == VONAT) && ((FOJELZO == FOJELZO) || (FOJELZO == EGYESITETT))) || ((C_VU_lez_In_ker_In_ker_VU_tip_fojelzo == TOLATO) && ((FOJELZO == TOLATASJELZO) || (FOJELZO == EGYESITETT))))))));
+				BA_T_lez_fojelzo := true;
+				BA_T_VU_tip_fojelzo := VU_tip_fojelzo;
+				_F_VU_lez_val_Out_val_VU_tip_fojelzo_ := SIKERES;
+				_F_VU_lez_val_Out_obj_id_fojelzo_ := S_VU_lez_Out_val_In_obj_id_fojelzo;
+				_F_VU_lez_val_Out_fojelzo_ := true;
+				f_VU_lez_reg_fojelzo := F_VU_lez_Inputra_Var;
+			}
+		} or {
+			assume ((!((S_VU_lez_Out_val_In_val_VU_tip_fojelzo == SIKERES))) && (S_VU_lez_Out_val_In_val_VU_tip_fojelzo == ELUTASITVA));
+			_F_VU_lez_val_Out_val_VU_tip_fojelzo_ := ELUTASITVA;
+			_F_VU_lez_val_Out_obj_id_fojelzo_ := S_VU_lez_Out_val_In_obj_id_fojelzo;
+			_F_VU_lez_val_Out_fojelzo_ := true;
+			f_VU_lez_reg_fojelzo := F_VU_lez_Inputra_Var;
+		}
+	} or {
+		assume (!(((((f_VU_lez_reg_fojelzo == F_VU_lez_Inputra_Var) && (F_VU_lez_ker_In_fojelzo == true))) || (((f_VU_lez_reg_fojelzo == F_VU_lez_Valaszra_Var) && (S_VU_lez_Out_val_In_fojelzo == true))))));
+	}
+	_S_VU_lez_Out_val_In_val_VU_tip_fojelzo_ := SIKERES;
+	_C_VU_lez_In_ker_In_tolatasjelzo_ := false;
+	_S_VU_lez_Out_val_In_fojelzo_ := false;
+	_S_VU_lez_Out_val_In_obj_id_fojelzo_ := 0;
+	choice {
+		assume (((((e_VU_lez_reg_valto0 == E_VU_lez_B_Valaszra_Var) && ((!(((B_VU_lez_Out_val_In_valto0 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto0 == SIKERES)))) && ((B_VU_lez_Out_val_In_valto0 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto0 == ELUTASITVA))))) || (((e_VU_lez_reg_valto0 == E_VU_lez_Inputra_Var) && (E_VU_lez_In_ker_In_valto0 == true))) || (((e_VU_lez_reg_valto0 == E_VU_lez_B_Valaszra_Var) && ((B_VU_lez_Out_val_In_valto0 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto0 == SIKERES))))) || ((((trigger_OV_keres_reg_valto0 == Trigger_OV_keres_Inputra_Var) && true)) || (((trigger_OV_keres_reg_valto0 == Trigger_OV_keres_Valaszra_VarB) && (true && (!((BA_VU_lez_valto0 != NINCS)))))) || (((trigger_OV_keres_reg_valto0 == Trigger_OV_keres_Valaszra_VarJ) && (true && (!((BA_VU_lez_valto0 != NINCS))))))));
+		choice {
+			assume (((e_VU_lez_reg_valto0 == E_VU_lez_B_Valaszra_Var) && ((!(((B_VU_lez_Out_val_In_valto0 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto0 == SIKERES)))) && ((B_VU_lez_Out_val_In_valto0 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto0 == ELUTASITVA)))));
+			_S_VU_lez_Out_val_In_val_VU_tip_fojelzo_ := ELUTASITVA;
+			_S_VU_lez_Out_val_In_obj_id_fojelzo_ := B_VU_lez_Out_val_In_obj_id_valto0;
+			_S_VU_lez_Out_val_In_fojelzo_ := true;
+			e_VU_lez_reg_valto0 := E_VU_lez_Inputra_Var;
+		} or {
+			assume (((e_VU_lez_reg_valto0 == E_VU_lez_Inputra_Var) && (E_VU_lez_In_ker_In_valto0 == true)));
+			e_VU_lez_reg_valto0 := __Inactive__;
+			choice {
+				assume ((BA_vezer_valto0 == JOBB) && ((A_AI_ell_In_AI_ellValue_valto0 == JOBB_VEGALLAS) || (A_AI_ell_In_AI_ellValue_valto0 == JOBB_ELVESZTETT)) && (BA_VU_lez_valto0 == NINCS));
+				e_VU_lez_reg_valto0 := E_VU_lez_J_Valaszra_Var;
+			} or {
+				assume ((!(((BA_vezer_valto0 == JOBB) && ((A_AI_ell_In_AI_ellValue_valto0 == JOBB_VEGALLAS) || (A_AI_ell_In_AI_ellValue_valto0 == JOBB_ELVESZTETT)) && (BA_VU_lez_valto0 == NINCS)))) && ((BA_vezer_valto0 == BAL) && ((A_AI_ell_In_AI_ellValue_valto0 == BAL_VEGALLAS) || (A_AI_ell_In_AI_ellValue_valto0 == BAL_ELVESZTETT)) && (BA_VU_lez_valto0 == NINCS)));
+				_C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo_ := E_VU_lez_In_ker_In_ker_VU_tip_valto0;
+				_C_VU_lez_In_ker_In_tolatasjelzo_ := true;
+				e_VU_lez_reg_valto0 := E_VU_lez_B_Valaszra_Var;
+			} or {
+				assume ((!((((BA_vezer_valto0 == JOBB) && ((A_AI_ell_In_AI_ellValue_valto0 == JOBB_VEGALLAS) || (A_AI_ell_In_AI_ellValue_valto0 == JOBB_ELVESZTETT)) && (BA_VU_lez_valto0 == NINCS))))) && (!((((BA_vezer_valto0 == BAL) && ((A_AI_ell_In_AI_ellValue_valto0 == BAL_VEGALLAS) || (A_AI_ell_In_AI_ellValue_valto0 == BAL_ELVESZTETT)) && (BA_VU_lez_valto0 == NINCS))))));
+				_S_VU_lez_Out_val_In_val_VU_tip_fojelzo_ := ELUTASITVA;
+				_S_VU_lez_Out_val_In_obj_id_fojelzo_ := 10;
+				_S_VU_lez_Out_val_In_fojelzo_ := true;
+				e_VU_lez_reg_valto0 := E_VU_lez_Inputra_Var;
+			}
+		} or {
+			assume (((e_VU_lez_reg_valto0 == E_VU_lez_B_Valaszra_Var) && ((B_VU_lez_Out_val_In_valto0 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto0 == SIKERES))));
+			BA_VU_lez_valto0 := ELOLROL;
+			_S_VU_lez_Out_val_In_val_VU_tip_fojelzo_ := SIKERES;
+			_S_VU_lez_Out_val_In_obj_id_fojelzo_ := B_VU_lez_Out_val_In_obj_id_valto0;
+			_S_VU_lez_Out_val_In_fojelzo_ := true;
+			e_VU_lez_reg_valto0 := E_VU_lez_Inputra_Var;
+		} or {
+			assume (!(((((e_VU_lez_reg_valto0 == E_VU_lez_B_Valaszra_Var) && ((!(((B_VU_lez_Out_val_In_valto0 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto0 == SIKERES)))) && ((B_VU_lez_Out_val_In_valto0 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto0 == ELUTASITVA))))) || (((e_VU_lez_reg_valto0 == E_VU_lez_Inputra_Var) && (E_VU_lez_In_ker_In_valto0 == true))) || (((e_VU_lez_reg_valto0 == E_VU_lez_B_Valaszra_Var) && ((B_VU_lez_Out_val_In_valto0 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto0 == SIKERES)))))));
+		}
+		choice {
+			assume (((trigger_OV_keres_reg_valto0 == Trigger_OV_keres_Inputra_Var) && true));
+			trigger_OV_keres_reg_valto0 := __Inactive__;
+			choice {
+				assume (BA_VU_lez_valto0 != NINCS);
+				choice {
+					assume (BA_vezer_valto0 == JOBB);
+					trigger_OV_keres_reg_valto0 := Trigger_OV_keres_Valaszra_VarB;
+				} or {
+					assume ((!((BA_vezer_valto0 == JOBB))) && (BA_vezer_valto0 == BAL));
+					trigger_OV_keres_reg_valto0 := Trigger_OV_keres_Valaszra_VarJ;
+				}
+			} or {
+				assume ((!(((BA_VU_lez_valto0 != NINCS)))));
+				trigger_OV_keres_reg_valto0 := Trigger_OV_keres_Inputra_Var;
+			}
+		} or {
+			assume (((trigger_OV_keres_reg_valto0 == Trigger_OV_keres_Valaszra_VarB) && (true && (!((BA_VU_lez_valto0 != NINCS))))));
+			trigger_OV_keres_reg_valto0 := Trigger_OV_keres_Inputra_Var;
+		} or {
+			assume (((trigger_OV_keres_reg_valto0 == Trigger_OV_keres_Valaszra_VarJ) && (true && (!((BA_VU_lez_valto0 != NINCS))))));
+			trigger_OV_keres_reg_valto0 := Trigger_OV_keres_Inputra_Var;
+		} or {
+			assume (!(((((trigger_OV_keres_reg_valto0 == Trigger_OV_keres_Inputra_Var) && true)) || (((trigger_OV_keres_reg_valto0 == Trigger_OV_keres_Valaszra_VarB) && (true && (!((BA_VU_lez_valto0 != NINCS)))))) || (((trigger_OV_keres_reg_valto0 == Trigger_OV_keres_Valaszra_VarJ) && (true && (!((BA_VU_lez_valto0 != NINCS)))))))));
+		}
+	} or {
+		assume (!(((((((e_VU_lez_reg_valto0 == E_VU_lez_B_Valaszra_Var) && ((!(((B_VU_lez_Out_val_In_valto0 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto0 == SIKERES)))) && ((B_VU_lez_Out_val_In_valto0 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto0 == ELUTASITVA))))) || (((e_VU_lez_reg_valto0 == E_VU_lez_Inputra_Var) && (E_VU_lez_In_ker_In_valto0 == true))) || (((e_VU_lez_reg_valto0 == E_VU_lez_B_Valaszra_Var) && ((B_VU_lez_Out_val_In_valto0 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto0 == SIKERES))))) || ((((trigger_OV_keres_reg_valto0 == Trigger_OV_keres_Inputra_Var) && true)) || (((trigger_OV_keres_reg_valto0 == Trigger_OV_keres_Valaszra_VarB) && (true && (!((BA_VU_lez_valto0 != NINCS)))))) || (((trigger_OV_keres_reg_valto0 == Trigger_OV_keres_Valaszra_VarJ) && (true && (!((BA_VU_lez_valto0 != NINCS)))))))))));
+	}
+	_E_VU_lez_In_ker_In_valto1_ := false;
+	_B_VU_lez_Out_val_In_val_VU_tip_valto0_ := SIKERES;
+	_B_VU_lez_Out_val_In_valto0_ := false;
+	_B_VU_lez_Out_val_In_obj_id_valto0_ := 0;
+	choice {
+		assume (((c_VU_lez_reg_tolatasjelzo == C_VU_lez_Valaszra_Var) && (S_VU_lez_Out_val_In_tolatasjelzo == true)));
+		c_VU_lez_reg_tolatasjelzo := __Inactive__;
+		choice {
+			assume (S_VU_lez_Out_val_In_val_VU_tip_tolatasjelzo == SIKERES);
+			choice {
+				assume (((C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo == VONAT) && ((TOLATASJELZO == FOJELZO) || (TOLATASJELZO == EGYESITETT))) || ((C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo == TOLATO) && ((TOLATASJELZO == TOLATASJELZO) || (TOLATASJELZO == EGYESITETT))));
+				BA_S_lez_tolatasjelzo := true;
+				BA_S_VU_tip_tolatasjelzo := VU_tip_tolatasjelzo;
+				_B_VU_lez_Out_val_In_val_VU_tip_valto0_ := SIKERES;
+				_B_VU_lez_Out_val_In_obj_id_valto0_ := S_VU_lez_Out_val_In_obj_id_tolatasjelzo;
+				_B_VU_lez_Out_val_In_valto0_ := true;
+				c_VU_lez_reg_tolatasjelzo := C_VU_lez_Inputra_Var;
+			} or {
+				assume ((!(((((C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo == VONAT) && ((TOLATASJELZO == FOJELZO) || (TOLATASJELZO == EGYESITETT))) || ((C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo == TOLATO) && ((TOLATASJELZO == TOLATASJELZO) || (TOLATASJELZO == EGYESITETT))))))));
+				BA_T_lez_tolatasjelzo := true;
+				BA_T_VU_tip_tolatasjelzo := VU_tip_tolatasjelzo;
+				_B_VU_lez_Out_val_In_val_VU_tip_valto0_ := SIKERES;
+				_B_VU_lez_Out_val_In_obj_id_valto0_ := S_VU_lez_Out_val_In_obj_id_tolatasjelzo;
+				_B_VU_lez_Out_val_In_valto0_ := true;
+				c_VU_lez_reg_tolatasjelzo := C_VU_lez_Inputra_Var;
+			}
+		} or {
+			assume ((!((S_VU_lez_Out_val_In_val_VU_tip_tolatasjelzo == SIKERES))) && (S_VU_lez_Out_val_In_val_VU_tip_tolatasjelzo == ELUTASITVA));
+			_B_VU_lez_Out_val_In_val_VU_tip_valto0_ := ELUTASITVA;
+			_B_VU_lez_Out_val_In_obj_id_valto0_ := S_VU_lez_Out_val_In_obj_id_tolatasjelzo;
+			_B_VU_lez_Out_val_In_valto0_ := true;
+			c_VU_lez_reg_tolatasjelzo := C_VU_lez_Inputra_Var;
+		}
+	} or {
+		assume (((c_VU_lez_reg_tolatasjelzo == C_VU_lez_Inputra_Var) && (C_VU_lez_In_ker_In_tolatasjelzo == true)));
+		c_VU_lez_reg_tolatasjelzo := __Inactive__;
+		choice {
+			assume (((C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo == VONAT) && ((TOLATASJELZO == FOJELZO) || (TOLATASJELZO == EGYESITETT))) || ((C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo == TOLATO) && ((TOLATASJELZO == TOLATASJELZO) || (TOLATASJELZO == EGYESITETT))));
+			choice {
+				assume ((!(BA_C_lez_tolatasjelzo)) && (!(BA_A_lez_tolatasjelzo)) && (!(BA_T_lez_tolatasjelzo)) && (!(BA_celkiz_tolatasjelzo)) && (A_AI_jelzes_In_AI_jelzesValue_tolatasjelzo == MEGALLJ));
+				BA_C_lez_tolatasjelzo := true;
+				BA_C_VU_tip_tolatasjelzo := C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo;
+				_B_VU_lez_Out_val_In_val_VU_tip_valto0_ := SIKERES;
+				_B_VU_lez_Out_val_In_obj_id_valto0_ := 1;
+				_B_VU_lez_Out_val_In_valto0_ := true;
+				c_VU_lez_reg_tolatasjelzo := C_VU_lez_Inputra_Var;
+			} or {
+				assume ((!((((!(BA_C_lez_tolatasjelzo)) && (!(BA_A_lez_tolatasjelzo)) && (!(BA_T_lez_tolatasjelzo)) && (!(BA_celkiz_tolatasjelzo)) && (A_AI_jelzes_In_AI_jelzesValue_tolatasjelzo == MEGALLJ))))));
+				_B_VU_lez_Out_val_In_val_VU_tip_valto0_ := ELUTASITVA;
+				_B_VU_lez_Out_val_In_obj_id_valto0_ := 1;
+				_B_VU_lez_Out_val_In_valto0_ := true;
+				c_VU_lez_reg_tolatasjelzo := C_VU_lez_Inputra_Var;
+			}
+		} or {
+			assume ((!((((C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo == VONAT) && ((TOLATASJELZO == FOJELZO) || (TOLATASJELZO == EGYESITETT))) || ((C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo == TOLATO) && ((TOLATASJELZO == TOLATASJELZO) || (TOLATASJELZO == EGYESITETT)))))) && ((!(BA_C_lez_tolatasjelzo)) && (!(BA_A_lez_tolatasjelzo)) && (!(BA_T_lez_tolatasjelzo)) && (!(BA_celkiz_tolatasjelzo))));
+			_E_VU_lez_In_ker_In_ker_VU_tip_valto1_ := C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo;
+			_E_VU_lez_In_ker_In_valto1_ := true;
+			c_VU_lez_reg_tolatasjelzo := C_VU_lez_Valaszra_Var;
+		} or {
+			assume ((!(((((C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo == VONAT) && ((TOLATASJELZO == FOJELZO) || (TOLATASJELZO == EGYESITETT))) || ((C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo == TOLATO) && ((TOLATASJELZO == TOLATASJELZO) || (TOLATASJELZO == EGYESITETT))))))) && (!((((!(BA_C_lez_tolatasjelzo)) && (!(BA_A_lez_tolatasjelzo)) && (!(BA_T_lez_tolatasjelzo)) && (!(BA_celkiz_tolatasjelzo)))))));
+			_B_VU_lez_Out_val_In_val_VU_tip_valto0_ := ELUTASITVA;
+			_B_VU_lez_Out_val_In_obj_id_valto0_ := 1;
+			_B_VU_lez_Out_val_In_valto0_ := true;
+			c_VU_lez_reg_tolatasjelzo := C_VU_lez_Inputra_Var;
+		}
+	} or {
+		assume (!(((((c_VU_lez_reg_tolatasjelzo == C_VU_lez_Valaszra_Var) && (S_VU_lez_Out_val_In_tolatasjelzo == true))) || (((c_VU_lez_reg_tolatasjelzo == C_VU_lez_Inputra_Var) && (C_VU_lez_In_ker_In_tolatasjelzo == true))))));
+	}
+	_S_VU_lez_Out_val_In_val_VU_tip_tolatasjelzo_ := SIKERES;
+	_S_VU_lez_Out_val_In_tolatasjelzo_ := false;
+	_S_VU_lez_Out_val_In_obj_id_tolatasjelzo_ := 0;
+	_B_VU_lez_In_ker_In_valto2_ := false;
+	choice {
+		assume (((((e_VU_lez_reg_valto1 == E_VU_lez_B_Valaszra_Var) && ((!(((B_VU_lez_Out_val_In_valto1 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto1 == SIKERES)))) && ((B_VU_lez_Out_val_In_valto1 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto1 == ELUTASITVA))))) || (((e_VU_lez_reg_valto1 == E_VU_lez_B_Valaszra_Var) && ((B_VU_lez_Out_val_In_valto1 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto1 == SIKERES)))) || (((e_VU_lez_reg_valto1 == E_VU_lez_Inputra_Var) && (E_VU_lez_In_ker_In_valto1 == true)))) || ((((trigger_OV_keres_reg_valto1 == Trigger_OV_keres_Valaszra_VarJ) && (true && (!((BA_VU_lez_valto1 != NINCS)))))) || (((trigger_OV_keres_reg_valto1 == Trigger_OV_keres_Inputra_Var) && true)) || (((trigger_OV_keres_reg_valto1 == Trigger_OV_keres_Valaszra_VarB) && (true && (!((BA_VU_lez_valto1 != NINCS))))))));
+		choice {
+			assume (((e_VU_lez_reg_valto1 == E_VU_lez_B_Valaszra_Var) && ((!(((B_VU_lez_Out_val_In_valto1 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto1 == SIKERES)))) && ((B_VU_lez_Out_val_In_valto1 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto1 == ELUTASITVA)))));
+			_S_VU_lez_Out_val_In_val_VU_tip_tolatasjelzo_ := ELUTASITVA;
+			_S_VU_lez_Out_val_In_obj_id_tolatasjelzo_ := B_VU_lez_Out_val_In_obj_id_valto1;
+			_S_VU_lez_Out_val_In_tolatasjelzo_ := true;
+			e_VU_lez_reg_valto1 := E_VU_lez_Inputra_Var;
+		} or {
+			assume (((e_VU_lez_reg_valto1 == E_VU_lez_B_Valaszra_Var) && ((B_VU_lez_Out_val_In_valto1 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto1 == SIKERES))));
+			BA_VU_lez_valto1 := ELOLROL;
+			_S_VU_lez_Out_val_In_val_VU_tip_tolatasjelzo_ := SIKERES;
+			_S_VU_lez_Out_val_In_obj_id_tolatasjelzo_ := B_VU_lez_Out_val_In_obj_id_valto1;
+			_S_VU_lez_Out_val_In_tolatasjelzo_ := true;
+			e_VU_lez_reg_valto1 := E_VU_lez_Inputra_Var;
+		} or {
+			assume (((e_VU_lez_reg_valto1 == E_VU_lez_Inputra_Var) && (E_VU_lez_In_ker_In_valto1 == true)));
+			e_VU_lez_reg_valto1 := __Inactive__;
+			choice {
+				assume ((BA_vezer_valto1 == JOBB) && ((A_AI_ell_In_AI_ellValue_valto1 == JOBB_VEGALLAS) || (A_AI_ell_In_AI_ellValue_valto1 == JOBB_ELVESZTETT)) && (BA_VU_lez_valto1 == NINCS));
+				e_VU_lez_reg_valto1 := E_VU_lez_J_Valaszra_Var;
+			} or {
+				assume ((!(((BA_vezer_valto1 == JOBB) && ((A_AI_ell_In_AI_ellValue_valto1 == JOBB_VEGALLAS) || (A_AI_ell_In_AI_ellValue_valto1 == JOBB_ELVESZTETT)) && (BA_VU_lez_valto1 == NINCS)))) && ((BA_vezer_valto1 == BAL) && ((A_AI_ell_In_AI_ellValue_valto1 == BAL_VEGALLAS) || (A_AI_ell_In_AI_ellValue_valto1 == BAL_ELVESZTETT)) && (BA_VU_lez_valto1 == NINCS)));
+				_B_VU_lez_In_ker_In_ker_VU_tip_valto2_ := E_VU_lez_In_ker_In_ker_VU_tip_valto1;
+				_B_VU_lez_In_ker_In_valto2_ := true;
+				e_VU_lez_reg_valto1 := E_VU_lez_B_Valaszra_Var;
+			} or {
+				assume ((!((((BA_vezer_valto1 == JOBB) && ((A_AI_ell_In_AI_ellValue_valto1 == JOBB_VEGALLAS) || (A_AI_ell_In_AI_ellValue_valto1 == JOBB_ELVESZTETT)) && (BA_VU_lez_valto1 == NINCS))))) && (!((((BA_vezer_valto1 == BAL) && ((A_AI_ell_In_AI_ellValue_valto1 == BAL_VEGALLAS) || (A_AI_ell_In_AI_ellValue_valto1 == BAL_ELVESZTETT)) && (BA_VU_lez_valto1 == NINCS))))));
+				_S_VU_lez_Out_val_In_val_VU_tip_tolatasjelzo_ := ELUTASITVA;
+				_S_VU_lez_Out_val_In_obj_id_tolatasjelzo_ := 11;
+				_S_VU_lez_Out_val_In_tolatasjelzo_ := true;
+				e_VU_lez_reg_valto1 := E_VU_lez_Inputra_Var;
+			}
+		} or {
+			assume (!(((((e_VU_lez_reg_valto1 == E_VU_lez_B_Valaszra_Var) && ((!(((B_VU_lez_Out_val_In_valto1 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto1 == SIKERES)))) && ((B_VU_lez_Out_val_In_valto1 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto1 == ELUTASITVA))))) || (((e_VU_lez_reg_valto1 == E_VU_lez_B_Valaszra_Var) && ((B_VU_lez_Out_val_In_valto1 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto1 == SIKERES)))) || (((e_VU_lez_reg_valto1 == E_VU_lez_Inputra_Var) && (E_VU_lez_In_ker_In_valto1 == true))))));
+		}
+		choice {
+			assume (((trigger_OV_keres_reg_valto1 == Trigger_OV_keres_Valaszra_VarJ) && (true && (!((BA_VU_lez_valto1 != NINCS))))));
+			trigger_OV_keres_reg_valto1 := Trigger_OV_keres_Inputra_Var;
+		} or {
+			assume (((trigger_OV_keres_reg_valto1 == Trigger_OV_keres_Inputra_Var) && true));
+			trigger_OV_keres_reg_valto1 := __Inactive__;
+			choice {
+				assume (BA_VU_lez_valto1 != NINCS);
+				choice {
+					assume (BA_vezer_valto1 == JOBB);
+					trigger_OV_keres_reg_valto1 := Trigger_OV_keres_Valaszra_VarB;
+				} or {
+					assume ((!((BA_vezer_valto1 == JOBB))) && (BA_vezer_valto1 == BAL));
+					trigger_OV_keres_reg_valto1 := Trigger_OV_keres_Valaszra_VarJ;
+				}
+			} or {
+				assume ((!(((BA_VU_lez_valto1 != NINCS)))));
+				trigger_OV_keres_reg_valto1 := Trigger_OV_keres_Inputra_Var;
+			}
+		} or {
+			assume (((trigger_OV_keres_reg_valto1 == Trigger_OV_keres_Valaszra_VarB) && (true && (!((BA_VU_lez_valto1 != NINCS))))));
+			trigger_OV_keres_reg_valto1 := Trigger_OV_keres_Inputra_Var;
+		} or {
+			assume (!(((((trigger_OV_keres_reg_valto1 == Trigger_OV_keres_Valaszra_VarJ) && (true && (!((BA_VU_lez_valto1 != NINCS)))))) || (((trigger_OV_keres_reg_valto1 == Trigger_OV_keres_Inputra_Var) && true)) || (((trigger_OV_keres_reg_valto1 == Trigger_OV_keres_Valaszra_VarB) && (true && (!((BA_VU_lez_valto1 != NINCS)))))))));
+		}
+	} or {
+		assume (!(((((((e_VU_lez_reg_valto1 == E_VU_lez_B_Valaszra_Var) && ((!(((B_VU_lez_Out_val_In_valto1 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto1 == SIKERES)))) && ((B_VU_lez_Out_val_In_valto1 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto1 == ELUTASITVA))))) || (((e_VU_lez_reg_valto1 == E_VU_lez_B_Valaszra_Var) && ((B_VU_lez_Out_val_In_valto1 == true) && (B_VU_lez_Out_val_In_val_VU_tip_valto1 == SIKERES)))) || (((e_VU_lez_reg_valto1 == E_VU_lez_Inputra_Var) && (E_VU_lez_In_ker_In_valto1 == true)))) || ((((trigger_OV_keres_reg_valto1 == Trigger_OV_keres_Valaszra_VarJ) && (true && (!((BA_VU_lez_valto1 != NINCS)))))) || (((trigger_OV_keres_reg_valto1 == Trigger_OV_keres_Inputra_Var) && true)) || (((trigger_OV_keres_reg_valto1 == Trigger_OV_keres_Valaszra_VarB) && (true && (!((BA_VU_lez_valto1 != NINCS)))))))))));
+	}
+	_B_VU_lez_Out_val_In_val_VU_tip_valto1_ := SIKERES;
+	_S_VU_lez_In_ker_In_atmenetjelzo_ := false;
+	_B_VU_lez_Out_val_In_obj_id_valto1_ := 0;
+	_B_VU_lez_Out_val_In_valto1_ := false;
+	choice {
+		assume (((((b_VU_lez_reg_valto2 == B_VU_lez_Inputra_Var) && (B_VU_lez_In_ker_In_valto2 == true))) || (((b_VU_lez_reg_valto2 == B_VU_lez_Valaszra_Var) && (E_VU_lez_Out_val_In_valto2 == true)))) || ((((trigger_OV_keres_reg_valto2 == Trigger_OV_keres_Inputra_Var) && true)) || (((trigger_OV_keres_reg_valto2 == Trigger_OV_keres_Valaszra_VarB) && (true && (!((BA_VU_lez_valto2 != NINCS)))))) || (((trigger_OV_keres_reg_valto2 == Trigger_OV_keres_Valaszra_VarJ) && (true && (!((BA_VU_lez_valto2 != NINCS))))))));
+		choice {
+			assume (((b_VU_lez_reg_valto2 == B_VU_lez_Inputra_Var) && (B_VU_lez_In_ker_In_valto2 == true)));
+			b_VU_lez_reg_valto2 := __Inactive__;
+			choice {
+				assume ((BA_vezer_valto2 == BAL) && ((A_AI_ell_In_AI_ellValue_valto2 == BAL_VEGALLAS) || (A_AI_ell_In_AI_ellValue_valto2 == BAL_ELVESZTETT)) && (BA_VU_lez_valto2 == NINCS));
+				_S_VU_lez_In_ker_In_ker_VU_tip_atmenetjelzo_ := B_VU_lez_In_ker_In_ker_VU_tip_valto2;
+				_S_VU_lez_In_ker_In_atmenetjelzo_ := true;
+				b_VU_lez_reg_valto2 := B_VU_lez_Valaszra_Var;
+			} or {
+				assume ((!((((BA_vezer_valto2 == BAL) && ((A_AI_ell_In_AI_ellValue_valto2 == BAL_VEGALLAS) || (A_AI_ell_In_AI_ellValue_valto2 == BAL_ELVESZTETT)) && (BA_VU_lez_valto2 == NINCS))))));
+				_B_VU_lez_Out_val_In_val_VU_tip_valto1_ := ELUTASITVA;
+				_B_VU_lez_Out_val_In_obj_id_valto1_ := 12;
+				_B_VU_lez_Out_val_In_valto1_ := true;
+				b_VU_lez_reg_valto2 := B_VU_lez_Inputra_Var;
+			}
+		} or {
+			assume (((b_VU_lez_reg_valto2 == B_VU_lez_Valaszra_Var) && (E_VU_lez_Out_val_In_valto2 == true)));
+			b_VU_lez_reg_valto2 := __Inactive__;
+			choice {
+				assume (E_VU_lez_Out_val_In_val_VU_tip_valto2 == SIKERES);
+				BA_VU_lez_valto2 := GYOKFELOL;
+				_B_VU_lez_Out_val_In_val_VU_tip_valto1_ := SIKERES;
+				_B_VU_lez_Out_val_In_obj_id_valto1_ := E_VU_lez_Out_val_In_obj_id_valto2;
+				_B_VU_lez_Out_val_In_valto1_ := true;
+				b_VU_lez_reg_valto2 := B_VU_lez_Inputra_Var;
+			} or {
+				assume ((!((E_VU_lez_Out_val_In_val_VU_tip_valto2 == SIKERES))) && (E_VU_lez_Out_val_In_val_VU_tip_valto2 == ELUTASITVA));
+				_B_VU_lez_Out_val_In_val_VU_tip_valto1_ := ELUTASITVA;
+				_B_VU_lez_Out_val_In_obj_id_valto1_ := E_VU_lez_Out_val_In_obj_id_valto2;
+				_B_VU_lez_Out_val_In_valto1_ := true;
+				b_VU_lez_reg_valto2 := B_VU_lez_Inputra_Var;
+			}
+		} or {
+			assume (!(((((b_VU_lez_reg_valto2 == B_VU_lez_Inputra_Var) && (B_VU_lez_In_ker_In_valto2 == true))) || (((b_VU_lez_reg_valto2 == B_VU_lez_Valaszra_Var) && (E_VU_lez_Out_val_In_valto2 == true))))));
+		}
+		choice {
+			assume (((trigger_OV_keres_reg_valto2 == Trigger_OV_keres_Inputra_Var) && true));
+			trigger_OV_keres_reg_valto2 := __Inactive__;
+			choice {
+				assume (BA_VU_lez_valto2 != NINCS);
+				choice {
+					assume (BA_vezer_valto2 == JOBB);
+					trigger_OV_keres_reg_valto2 := Trigger_OV_keres_Valaszra_VarB;
+				} or {
+					assume ((!((BA_vezer_valto2 == JOBB))) && (BA_vezer_valto2 == BAL));
+					trigger_OV_keres_reg_valto2 := Trigger_OV_keres_Valaszra_VarJ;
+				}
+			} or {
+				assume ((!(((BA_VU_lez_valto2 != NINCS)))));
+				trigger_OV_keres_reg_valto2 := Trigger_OV_keres_Inputra_Var;
+			}
+		} or {
+			assume (((trigger_OV_keres_reg_valto2 == Trigger_OV_keres_Valaszra_VarB) && (true && (!((BA_VU_lez_valto2 != NINCS))))));
+			trigger_OV_keres_reg_valto2 := Trigger_OV_keres_Inputra_Var;
+		} or {
+			assume (((trigger_OV_keres_reg_valto2 == Trigger_OV_keres_Valaszra_VarJ) && (true && (!((BA_VU_lez_valto2 != NINCS))))));
+			trigger_OV_keres_reg_valto2 := Trigger_OV_keres_Inputra_Var;
+		} or {
+			assume (!(((((trigger_OV_keres_reg_valto2 == Trigger_OV_keres_Inputra_Var) && true)) || (((trigger_OV_keres_reg_valto2 == Trigger_OV_keres_Valaszra_VarB) && (true && (!((BA_VU_lez_valto2 != NINCS)))))) || (((trigger_OV_keres_reg_valto2 == Trigger_OV_keres_Valaszra_VarJ) && (true && (!((BA_VU_lez_valto2 != NINCS)))))))));
+		}
+	} or {
+		assume (!(((((((b_VU_lez_reg_valto2 == B_VU_lez_Inputra_Var) && (B_VU_lez_In_ker_In_valto2 == true))) || (((b_VU_lez_reg_valto2 == B_VU_lez_Valaszra_Var) && (E_VU_lez_Out_val_In_valto2 == true)))) || ((((trigger_OV_keres_reg_valto2 == Trigger_OV_keres_Inputra_Var) && true)) || (((trigger_OV_keres_reg_valto2 == Trigger_OV_keres_Valaszra_VarB) && (true && (!((BA_VU_lez_valto2 != NINCS)))))) || (((trigger_OV_keres_reg_valto2 == Trigger_OV_keres_Valaszra_VarJ) && (true && (!((BA_VU_lez_valto2 != NINCS)))))))))));
+	}
+	_E_VU_lez_Out_val_In_obj_id_valto2_ := 0;
+	_C_VU_lez_In_ker_In_celjelzo_ := false;
+	_E_VU_lez_Out_val_In_val_VU_tip_valto2_ := SIKERES;
+	_E_VU_lez_Out_val_In_valto2_ := false;
+	choice {
+		assume (((s_VU_lez_reg_atmenetjelzo == S_VU_Inputra_Var) && (S_VU_lez_In_ker_In_atmenetjelzo == true)));
+		s_VU_lez_reg_atmenetjelzo := __Inactive__;
+		choice {
+			assume ((!(BA_C_lez_atmenetjelzo)) && (!(BA_S_lez_atmenetjelzo)) && (!(BA_A_lez_atmenetjelzo)) && (!(BA_T_lez_atmenetjelzo)));
+			_C_VU_lez_In_ker_In_ker_VU_tip_celjelzo_ := S_VU_lez_In_ker_In_ker_VU_tip_atmenetjelzo;
+			_C_VU_lez_In_ker_In_celjelzo_ := true;
+			s_VU_lez_reg_atmenetjelzo := S_VU_Valaszra_Var;
+		} or {
+			assume ((!((((!(BA_C_lez_atmenetjelzo)) && (!(BA_S_lez_atmenetjelzo)) && (!(BA_A_lez_atmenetjelzo)) && (!(BA_T_lez_atmenetjelzo)))))));
+			_E_VU_lez_Out_val_In_val_VU_tip_valto2_ := ELUTASITVA;
+			_E_VU_lez_Out_val_In_obj_id_valto2_ := 2;
+			_E_VU_lez_Out_val_In_valto2_ := true;
+			s_VU_lez_reg_atmenetjelzo := S_VU_Inputra_Var;
+		}
+	} or {
+		assume (((s_VU_lez_reg_atmenetjelzo == S_VU_Valaszra_Var) && (C_VU_lez_Out_val_In_atmenetjelzo == true)));
+		s_VU_lez_reg_atmenetjelzo := __Inactive__;
+		choice {
+			assume (C_VU_lez_Out_val_In_val_VU_tip_atmenetjelzo == SIKERES);
+			BA_A_lez_atmenetjelzo := true;
+			BA_A_VU_tip_atmenetjelzo := VU_tip_atmenetjelzo;
+			_E_VU_lez_Out_val_In_val_VU_tip_valto2_ := SIKERES;
+			_E_VU_lez_Out_val_In_obj_id_valto2_ := C_VU_lez_Out_val_In_obj_id_atmenetjelzo;
+			_E_VU_lez_Out_val_In_valto2_ := true;
+			s_VU_lez_reg_atmenetjelzo := S_VU_Inputra_Var;
+		} or {
+			assume ((!((C_VU_lez_Out_val_In_val_VU_tip_atmenetjelzo == SIKERES))) && (C_VU_lez_Out_val_In_val_VU_tip_atmenetjelzo == ELUTASITVA));
+			_E_VU_lez_Out_val_In_val_VU_tip_valto2_ := ELUTASITVA;
+			_E_VU_lez_Out_val_In_obj_id_valto2_ := C_VU_lez_Out_val_In_obj_id_atmenetjelzo;
+			_E_VU_lez_Out_val_In_valto2_ := true;
+			s_VU_lez_reg_atmenetjelzo := S_VU_Inputra_Var;
+		}
+	} or {
+		assume (!(((((s_VU_lez_reg_atmenetjelzo == S_VU_Inputra_Var) && (S_VU_lez_In_ker_In_atmenetjelzo == true))) || (((s_VU_lez_reg_atmenetjelzo == S_VU_Valaszra_Var) && (C_VU_lez_Out_val_In_atmenetjelzo == true))))));
+	}
+	_C_VU_lez_Out_val_In_obj_id_atmenetjelzo_ := 0;
+	_C_VU_lez_Out_val_In_atmenetjelzo_ := false;
+	_C_VU_lez_Out_val_In_val_VU_tip_atmenetjelzo_ := SIKERES;
+	choice {
+		assume (((c_VU_lez_reg_celjelzo == C_VU_lez_Inputra_Var) && (C_VU_lez_In_ker_In_celjelzo == true)));
+		c_VU_lez_reg_celjelzo := __Inactive__;
+		choice {
+			assume (((C_VU_lez_In_ker_In_ker_VU_tip_celjelzo == VONAT) && ((EGYESITETT == FOJELZO) || (EGYESITETT == EGYESITETT))) || ((C_VU_lez_In_ker_In_ker_VU_tip_celjelzo == TOLATO) && ((EGYESITETT == TOLATASJELZO) || (EGYESITETT == EGYESITETT))));
+			choice {
+				assume ((!(BA_C_lez_celjelzo)) && (!(BA_A_lez_celjelzo)) && (!(BA_T_lez_celjelzo)) && (!(BA_celkiz_celjelzo)) && (A_AI_jelzes_In_AI_jelzesValue_celjelzo == MEGALLJ));
+				BA_C_lez_celjelzo := true;
+				BA_C_VU_tip_celjelzo := C_VU_lez_In_ker_In_ker_VU_tip_celjelzo;
+				_C_VU_lez_Out_val_In_val_VU_tip_atmenetjelzo_ := SIKERES;
+				_C_VU_lez_Out_val_In_obj_id_atmenetjelzo_ := 3;
+				_C_VU_lez_Out_val_In_atmenetjelzo_ := true;
+				c_VU_lez_reg_celjelzo := C_VU_lez_Inputra_Var;
+			} or {
+				assume ((!((((!(BA_C_lez_celjelzo)) && (!(BA_A_lez_celjelzo)) && (!(BA_T_lez_celjelzo)) && (!(BA_celkiz_celjelzo)) && (A_AI_jelzes_In_AI_jelzesValue_celjelzo == MEGALLJ))))));
+				_C_VU_lez_Out_val_In_val_VU_tip_atmenetjelzo_ := ELUTASITVA;
+				_C_VU_lez_Out_val_In_obj_id_atmenetjelzo_ := 3;
+				_C_VU_lez_Out_val_In_atmenetjelzo_ := true;
+				c_VU_lez_reg_celjelzo := C_VU_lez_Inputra_Var;
+			}
+		} or {
+			assume ((!((((C_VU_lez_In_ker_In_ker_VU_tip_celjelzo == VONAT) && ((EGYESITETT == FOJELZO) || (EGYESITETT == EGYESITETT))) || ((C_VU_lez_In_ker_In_ker_VU_tip_celjelzo == TOLATO) && ((EGYESITETT == TOLATASJELZO) || (EGYESITETT == EGYESITETT)))))) && ((!(BA_C_lez_celjelzo)) && (!(BA_A_lez_celjelzo)) && (!(BA_T_lez_celjelzo)) && (!(BA_celkiz_celjelzo))));
+			c_VU_lez_reg_celjelzo := C_VU_lez_Valaszra_Var;
+		} or {
+			assume ((!(((((C_VU_lez_In_ker_In_ker_VU_tip_celjelzo == VONAT) && ((EGYESITETT == FOJELZO) || (EGYESITETT == EGYESITETT))) || ((C_VU_lez_In_ker_In_ker_VU_tip_celjelzo == TOLATO) && ((EGYESITETT == TOLATASJELZO) || (EGYESITETT == EGYESITETT))))))) && (!((((!(BA_C_lez_celjelzo)) && (!(BA_A_lez_celjelzo)) && (!(BA_T_lez_celjelzo)) && (!(BA_celkiz_celjelzo)))))));
+			_C_VU_lez_Out_val_In_val_VU_tip_atmenetjelzo_ := ELUTASITVA;
+			_C_VU_lez_Out_val_In_obj_id_atmenetjelzo_ := 3;
+			_C_VU_lez_Out_val_In_atmenetjelzo_ := true;
+			c_VU_lez_reg_celjelzo := C_VU_lez_Inputra_Var;
+		}
+	} or {
+		assume (!(((((c_VU_lez_reg_celjelzo == C_VU_lez_Inputra_Var) && (C_VU_lez_In_ker_In_celjelzo == true))))));
+	}
+	F_VU_lez_val_Out_obj_id_fojelzo := _F_VU_lez_val_Out_obj_id_fojelzo_;
+	_F_VU_lez_val_Out_obj_id_fojelzo_ := 0;
+	E_VU_lez_In_ker_In_ker_VU_tip_valto0 := _E_VU_lez_In_ker_In_ker_VU_tip_valto0_;
+	_E_VU_lez_In_ker_In_ker_VU_tip_valto0_ := VONAT;
+	F_VU_lez_val_Out_fojelzo := _F_VU_lez_val_Out_fojelzo_;
+	_F_VU_lez_val_Out_fojelzo_ := false;
+	E_VU_lez_In_ker_In_valto0 := _E_VU_lez_In_ker_In_valto0_;
+	_E_VU_lez_In_ker_In_valto0_ := false;
+	F_VU_lez_val_Out_val_VU_tip_fojelzo := _F_VU_lez_val_Out_val_VU_tip_fojelzo_;
+	_F_VU_lez_val_Out_val_VU_tip_fojelzo_ := SIKERES;
+	S_VU_lez_Out_val_In_val_VU_tip_fojelzo := _S_VU_lez_Out_val_In_val_VU_tip_fojelzo_;
+	_S_VU_lez_Out_val_In_val_VU_tip_fojelzo_ := SIKERES;
+	C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo := _C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo_;
+	_C_VU_lez_In_ker_In_ker_VU_tip_tolatasjelzo_ := VONAT;
+	C_VU_lez_In_ker_In_tolatasjelzo := _C_VU_lez_In_ker_In_tolatasjelzo_;
+	_C_VU_lez_In_ker_In_tolatasjelzo_ := false;
+	S_VU_lez_Out_val_In_fojelzo := _S_VU_lez_Out_val_In_fojelzo_;
+	_S_VU_lez_Out_val_In_fojelzo_ := false;
+	S_VU_lez_Out_val_In_obj_id_fojelzo := _S_VU_lez_Out_val_In_obj_id_fojelzo_;
+	_S_VU_lez_Out_val_In_obj_id_fojelzo_ := 0;
+	E_VU_lez_In_ker_In_ker_VU_tip_valto1 := _E_VU_lez_In_ker_In_ker_VU_tip_valto1_;
+	_E_VU_lez_In_ker_In_ker_VU_tip_valto1_ := VONAT;
+	B_VU_lez_Out_val_In_val_VU_tip_valto0 := _B_VU_lez_Out_val_In_val_VU_tip_valto0_;
+	_B_VU_lez_Out_val_In_val_VU_tip_valto0_ := SIKERES;
+	B_VU_lez_Out_val_In_obj_id_valto0 := _B_VU_lez_Out_val_In_obj_id_valto0_;
+	_B_VU_lez_Out_val_In_obj_id_valto0_ := 0;
+	B_VU_lez_Out_val_In_valto0 := _B_VU_lez_Out_val_In_valto0_;
+	_B_VU_lez_Out_val_In_valto0_ := false;
+	E_VU_lez_In_ker_In_valto1 := _E_VU_lez_In_ker_In_valto1_;
+	_E_VU_lez_In_ker_In_valto1_ := false;
+	S_VU_lez_Out_val_In_tolatasjelzo := _S_VU_lez_Out_val_In_tolatasjelzo_;
+	_S_VU_lez_Out_val_In_tolatasjelzo_ := false;
+	S_VU_lez_Out_val_In_val_VU_tip_tolatasjelzo := _S_VU_lez_Out_val_In_val_VU_tip_tolatasjelzo_;
+	_S_VU_lez_Out_val_In_val_VU_tip_tolatasjelzo_ := SIKERES;
+	B_VU_lez_In_ker_In_ker_VU_tip_valto2 := _B_VU_lez_In_ker_In_ker_VU_tip_valto2_;
+	_B_VU_lez_In_ker_In_ker_VU_tip_valto2_ := VONAT;
+	B_VU_lez_In_ker_In_valto2 := _B_VU_lez_In_ker_In_valto2_;
+	_B_VU_lez_In_ker_In_valto2_ := false;
+	S_VU_lez_Out_val_In_obj_id_tolatasjelzo := _S_VU_lez_Out_val_In_obj_id_tolatasjelzo_;
+	_S_VU_lez_Out_val_In_obj_id_tolatasjelzo_ := 0;
+	B_VU_lez_Out_val_In_obj_id_valto1 := _B_VU_lez_Out_val_In_obj_id_valto1_;
+	_B_VU_lez_Out_val_In_obj_id_valto1_ := 0;
+	S_VU_lez_In_ker_In_atmenetjelzo := _S_VU_lez_In_ker_In_atmenetjelzo_;
+	_S_VU_lez_In_ker_In_atmenetjelzo_ := false;
+	B_VU_lez_Out_val_In_val_VU_tip_valto1 := _B_VU_lez_Out_val_In_val_VU_tip_valto1_;
+	_B_VU_lez_Out_val_In_val_VU_tip_valto1_ := SIKERES;
+	B_VU_lez_Out_val_In_valto1 := _B_VU_lez_Out_val_In_valto1_;
+	_B_VU_lez_Out_val_In_valto1_ := false;
+	S_VU_lez_In_ker_In_ker_VU_tip_atmenetjelzo := _S_VU_lez_In_ker_In_ker_VU_tip_atmenetjelzo_;
+	_S_VU_lez_In_ker_In_ker_VU_tip_atmenetjelzo_ := VONAT;
+	C_VU_lez_In_ker_In_celjelzo := _C_VU_lez_In_ker_In_celjelzo_;
+	_C_VU_lez_In_ker_In_celjelzo_ := false;
+	E_VU_lez_Out_val_In_valto2 := _E_VU_lez_Out_val_In_valto2_;
+	_E_VU_lez_Out_val_In_valto2_ := false;
+	E_VU_lez_Out_val_In_obj_id_valto2 := _E_VU_lez_Out_val_In_obj_id_valto2_;
+	_E_VU_lez_Out_val_In_obj_id_valto2_ := 0;
+	E_VU_lez_Out_val_In_val_VU_tip_valto2 := _E_VU_lez_Out_val_In_val_VU_tip_valto2_;
+	_E_VU_lez_Out_val_In_val_VU_tip_valto2_ := SIKERES;
+	C_VU_lez_In_ker_In_ker_VU_tip_celjelzo := _C_VU_lez_In_ker_In_ker_VU_tip_celjelzo_;
+	_C_VU_lez_In_ker_In_ker_VU_tip_celjelzo_ := VONAT;
+	C_VU_lez_Out_val_In_obj_id_atmenetjelzo := _C_VU_lez_Out_val_In_obj_id_atmenetjelzo_;
+	_C_VU_lez_Out_val_In_obj_id_atmenetjelzo_ := 0;
+	C_VU_lez_Out_val_In_val_VU_tip_atmenetjelzo := _C_VU_lez_Out_val_In_val_VU_tip_atmenetjelzo_;
+	_C_VU_lez_Out_val_In_val_VU_tip_atmenetjelzo_ := SIKERES;
+	C_VU_lez_Out_val_In_atmenetjelzo := _C_VU_lez_Out_val_In_atmenetjelzo_;
+	_C_VU_lez_Out_val_In_atmenetjelzo_ := false;
+	A_AI_jelzes_In_fojelzo := false;
+	A_AI_ell_In_AI_ellValue_valto2 := JOBB_VEGALLAS;
+	A_AI_jelzes_In_celjelzo := false;
+	A_AI_ell_In_valto1 := false;
+	A_AI_ell_In_valto0 := false;
+	A_AI_ell_In_valto2 := false;
+	F_VU_lez_ker_In_fojelzo := false;
+	A_AI_ell_In_AI_ellValue_valto0 := JOBB_VEGALLAS;
+	A_AI_ell_In_AI_ellValue_valto1 := JOBB_VEGALLAS;
+}
+init {
+	VU_tip_fojelzo := VONAT;
+	BA_S_VU_tip_fojelzo := VONAT;
+	BA_T_VU_tip_fojelzo := VONAT;
+	BA_S_lez_fojelzo := false;
+	BA_A_lez_fojelzo := false;
+	BA_T_lez_fojelzo := false;
+	f_VU_lez_reg_fojelzo := __Inactive__;
+	A_AI_jelzes_In_fojelzo := false;
+	F_VU_lez_ker_In_fojelzo := false;
+	F_VU_lez_val_Out_fojelzo := false;
+	BA_vezer_valto0 := BAL;
+	BA_VU_lez_valto0 := NINCS;
+	trigger_OV_keres_reg_valto0 := __Inactive__;
+	e_VU_lez_reg_valto0 := __Inactive__;
+	A_AI_ell_In_valto0 := false;
+	E_VU_lez_In_ker_In_valto0 := false;
+	S_VU_lez_Out_val_In_fojelzo := false;
+	VU_tip_tolatasjelzo := VONAT;
+	BA_S_VU_tip_tolatasjelzo := VONAT;
+	BA_T_VU_tip_tolatasjelzo := VONAT;
+	BA_C_VU_tip_tolatasjelzo := VONAT;
+	BA_S_lez_tolatasjelzo := false;
+	BA_A_lez_tolatasjelzo := false;
+	BA_T_lez_tolatasjelzo := false;
+	BA_C_lez_tolatasjelzo := false;
+	BA_celkiz_tolatasjelzo := false;
+	c_VU_lez_reg_tolatasjelzo := __Inactive__;
+	C_VU_lez_In_ker_In_tolatasjelzo := false;
+	B_VU_lez_Out_val_In_valto0 := false;
+	BA_vezer_valto1 := BAL;
+	BA_VU_lez_valto1 := NINCS;
+	e_VU_lez_reg_valto1 := __Inactive__;
+	trigger_OV_keres_reg_valto1 := __Inactive__;
+	A_AI_ell_In_valto1 := false;
+	E_VU_lez_In_ker_In_valto1 := false;
+	S_VU_lez_Out_val_In_tolatasjelzo := false;
+	BA_vezer_valto2 := BAL;
+	BA_VU_lez_valto2 := NINCS;
+	b_VU_lez_reg_valto2 := __Inactive__;
+	trigger_OV_keres_reg_valto2 := __Inactive__;
+	B_VU_lez_In_ker_In_valto2 := false;
+	A_AI_ell_In_valto2 := false;
+	B_VU_lez_Out_val_In_valto1 := false;
+	VU_tip_atmenetjelzo := VONAT;
+	BA_A_VU_tip_atmenetjelzo := VONAT;
+	BA_S_lez_atmenetjelzo := false;
+	BA_A_lez_atmenetjelzo := false;
+	BA_T_lez_atmenetjelzo := false;
+	BA_C_lez_atmenetjelzo := false;
+	s_VU_lez_reg_atmenetjelzo := __Inactive__;
+	S_VU_lez_In_ker_In_atmenetjelzo := false;
+	E_VU_lez_Out_val_In_valto2 := false;
+	BA_C_VU_tip_celjelzo := VONAT;
+	BA_A_lez_celjelzo := false;
+	BA_T_lez_celjelzo := false;
+	BA_C_lez_celjelzo := false;
+	BA_celkiz_celjelzo := false;
+	c_VU_lez_reg_celjelzo := __Inactive__;
+	C_VU_lez_In_ker_In_celjelzo := false;
+	A_AI_jelzes_In_celjelzo := false;
+	C_VU_lez_Out_val_In_atmenetjelzo := false;
+	f_VU_lez_reg_fojelzo := F_VU_lez_Inputra_Var;
+	e_VU_lez_reg_valto0 := E_VU_lez_Inputra_Var;
+	trigger_OV_keres_reg_valto0 := Trigger_OV_keres_Inputra_Var;
+	c_VU_lez_reg_tolatasjelzo := C_VU_lez_Inputra_Var;
+	e_VU_lez_reg_valto1 := E_VU_lez_Inputra_Var;
+	trigger_OV_keres_reg_valto1 := Trigger_OV_keres_Inputra_Var;
+	b_VU_lez_reg_valto2 := B_VU_lez_Inputra_Var;
+	trigger_OV_keres_reg_valto2 := Trigger_OV_keres_Inputra_Var;
+	s_VU_lez_reg_atmenetjelzo := S_VU_Inputra_Var;
+	c_VU_lez_reg_celjelzo := C_VU_lez_Inputra_Var;
+}
+env {
+	choice {
+		A_AI_jelzes_In_fojelzo := true;
+	} or {
+		A_AI_jelzes_In_fojelzo := false;
+	}
+	choice {
+		assume (A_AI_jelzes_In_fojelzo == true);
+		choice {
+			A_AI_jelzes_In_AI_jelzesValue_fojelzo := SOTET;
+		} or {
+			A_AI_jelzes_In_AI_jelzesValue_fojelzo := MEGALLJ;
+		}
+	} or {
+		assume (!((A_AI_jelzes_In_fojelzo == true)));
+	}
+	choice {
+		F_VU_lez_ker_In_fojelzo := true;
+	} or {
+		F_VU_lez_ker_In_fojelzo := false;
+	}
+	choice {
+		assume (F_VU_lez_ker_In_fojelzo == true);
+		choice {
+			F_VU_lez_ker_In_ker_VU_tip_fojelzo := TOLATO;
+		} or {
+			F_VU_lez_ker_In_ker_VU_tip_fojelzo := VONAT;
+		}
+	} or {
+		assume (!((F_VU_lez_ker_In_fojelzo == true)));
+	}
+	choice {
+		A_AI_ell_In_valto0 := true;
+	} or {
+		A_AI_ell_In_valto0 := false;
+	}
+	A_AI_ell_In_AI_ellValue_valto0 := JOBB_VEGALLAS;
+	choice {
+		assume (A_AI_ell_In_valto0 == true);
+		choice {
+			A_AI_ell_In_AI_ellValue_valto0 := JOBB_VEGALLAS;
+		} or {
+			A_AI_ell_In_AI_ellValue_valto0 := BAL_VEGALLAS;
+		} or {
+			A_AI_ell_In_AI_ellValue_valto0 := BAL_ELVESZTETT;
+		} or {
+			A_AI_ell_In_AI_ellValue_valto0 := JOBB_ELVESZTETT;
+		}
+	} or {
+		assume (!((A_AI_ell_In_valto0 == true)));
+	}
+	choice {
+		A_AI_ell_In_valto1 := true;
+	} or {
+		A_AI_ell_In_valto1 := false;
+	}
+	A_AI_ell_In_AI_ellValue_valto1 := JOBB_VEGALLAS;
+	choice {
+		assume (A_AI_ell_In_valto1 == true);
+		choice {
+			A_AI_ell_In_AI_ellValue_valto1 := JOBB_VEGALLAS;
+		} or {
+			A_AI_ell_In_AI_ellValue_valto1 := BAL_ELVESZTETT;
+		} or {
+			A_AI_ell_In_AI_ellValue_valto1 := JOBB_ELVESZTETT;
+		} or {
+			A_AI_ell_In_AI_ellValue_valto1 := BAL_VEGALLAS;
+		}
+	} or {
+		assume (!((A_AI_ell_In_valto1 == true)));
+	}
+	choice {
+		A_AI_ell_In_valto2 := true;
+	} or {
+		A_AI_ell_In_valto2 := false;
+	}
+	A_AI_ell_In_AI_ellValue_valto2 := JOBB_VEGALLAS;
+	choice {
+		assume (A_AI_ell_In_valto2 == true);
+		choice {
+			A_AI_ell_In_AI_ellValue_valto2 := BAL_VEGALLAS;
+		} or {
+			A_AI_ell_In_AI_ellValue_valto2 := BAL_ELVESZTETT;
+		} or {
+			A_AI_ell_In_AI_ellValue_valto2 := JOBB_VEGALLAS;
+		}
+	} or {
+		assume (!((A_AI_ell_In_valto2 == true)));
+	}
+	choice {
+		A_AI_jelzes_In_celjelzo := true;
+	} or {
+		A_AI_jelzes_In_celjelzo := false;
+	}
+	choice {
+		assume (A_AI_jelzes_In_celjelzo == true);
+		choice {
+			A_AI_jelzes_In_AI_jelzesValue_celjelzo := MEGALLJ;
+		} or {
+			A_AI_jelzes_In_AI_jelzesValue_celjelzo := SOTET;
+		}
+	} or {
+		assume (!((A_AI_jelzes_In_celjelzo == true)));
+	}
+	F_VU_lez_val_Out_fojelzo := false;
+}

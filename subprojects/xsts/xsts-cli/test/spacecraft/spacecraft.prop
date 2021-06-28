@@ -1,0 +1,3 @@
+prop {
+	!( ((operationRegion_System_spacecraft == Transmitting && mainRegion_System_spacecraft == Main && (battery_System_spacecraft < 80)) && (dataReception_System_station == Receiving && main_System_station == Operation && (packets_System_station >= 20))))
+}

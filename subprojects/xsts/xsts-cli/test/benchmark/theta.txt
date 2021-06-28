@@ -1,0 +1,2 @@
+version: 2.13.0
+parameters: --model models/faulty_model.xsts --property models/faulty.prop --domain EXPL --initprec CTRL --maxenum 250 --cex models/faulty.cex

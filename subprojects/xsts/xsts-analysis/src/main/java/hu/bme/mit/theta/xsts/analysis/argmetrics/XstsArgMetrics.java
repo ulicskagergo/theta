@@ -10,6 +10,7 @@ import hu.bme.mit.theta.xsts.XSTS;
 import hu.bme.mit.theta.xsts.analysis.XstsState;
 
 import java.util.*;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.stream.Collectors;
@@ -25,14 +26,16 @@ public class XstsArgMetrics {
 	private final List<VarDecl<?>> notCtrlVars;
 	private final List<ControlValuationInfo> metrics;
 	private final Map<Valuation, DataInfo> metricsMap;
+	private final String file;
 
-	public XstsArgMetrics(ARG<? extends State, ? extends Action> arg, XSTS xsts){
+	public XstsArgMetrics(ARG<? extends State, ? extends Action> arg, XSTS xsts, String file){
 		this.arg = arg;
 		this.ctrlVars = new ArrayList<>(xsts.getCtrlVars());
 		this.notCtrlVars = new ArrayList<>(xsts.getVars());
 		notCtrlVars.removeAll(ctrlVars);
 		this.metrics = new ArrayList<>();
 		this.metricsMap = new HashMap<>();
+		this.file = file;
 	}
 
 	public void getMetrics(){
@@ -55,7 +58,7 @@ public class XstsArgMetrics {
 
 	private void toJson() {
 		try {
-			FileWriter fileWriter = new FileWriter("metrics.txt");
+			FileWriter fileWriter = new FileWriter(file);
 			for (ControlValuationInfo controlValuationInfo : metrics) {
 				System.out.println(controlValuationInfo.toString());
 				fileWriter.write(controlValuationInfo + "\n");

@@ -1,0 +1,3 @@
+prop {
+	!( ((F_VU_lez_val_Out_fojelzo && F_VU_lez_val_Out_val_VU_tip_fojelzo == SIKERES)))
+}

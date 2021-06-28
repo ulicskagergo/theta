@@ -1,0 +1,10 @@
+Might not terminate in Theta v2.13.0:
+
+java -jar /tools/theta/theta-xsts-cli.jar --domain EXPL --refinement SEQ_ITP --maxenum 250 --model xstsVerification14066364649660818157.xsts --property xstsVerification14066364649660818157.prop --cex /tmp/xstsVerification14066364649660818157.cex --stacktrace
+java -jar /tools/theta/theta-xsts-cli.jar --domain PRED_CART --predsplit WHOLE --model xstsVerification14066364649660818157.xsts --property xstsVerification14066364649660818157.prop --cex /tmp/xstsVerification14066364649660818157.cex --stacktrace
+
+-----------------------
+
+Milán Mondok managed to get Theta verify the property on the model with the following parameterization. Ask him for the custom build of Theta, where this DOMAIN and INITPREC work correctly. (Expected result: the property is unsatisfied by the model, therefore there should be no trace returned.)
+
+java -jar /tools/theta/theta-xsts-cli.jar --domain EXPL_PRED --initprec CTRL --model xstsVerification14066364649660818157.xsts --property xstsVerification14066364649660818157.prop --cex /tmp/xstsVerification14066364649660818157.cex --stacktrace

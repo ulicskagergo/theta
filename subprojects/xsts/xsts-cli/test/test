@@ -1,0 +1,14 @@
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:./"
+
+case $1 in
+	0) java -jar theta-xsts-cli-2.15.0-all.jar --domain EXPL_PRED_COMBINED --initprec CTRL --maxatomcount ALLASSUMES --model spacecraft/spacecraft.xsts --property spacecraft/spacecraft.prop --stacktrace --argmetrics spacecraft/spacecraft.json;;
+	1) java -jar theta-xsts-cli-2.15.0-all.jar --domain EXPL_PRED_COMBINED --initprec CTRL --maxatomcount ALLASSUMES --model vaganyut/vaganyut.xsts --property vaganyut/vaganyut.prop --stacktrace --argmetrics vaganyut/vaganyut.json;;
+	2) java -jar theta-xsts-cli-2.15.0-all.jar --domain EXPL_PRED_COMBINED --initprec CTRL --maxatomcount ALLASSUMES --cex benchmark/correct.cex --model benchmark/correct.xsts --property benchmark/correct.prop --stacktrace --argmetrics benchmark/correct.json;;
+
+	*) echo "no test with number $1" ;;
+esac
+
+
+#0) java -jar theta-xsts-cli-2.15.0-all.jar --domain EXPL --refinement SEQ_ITP --maxenum 250 --model spacecraft/spacecraft.xsts --property spacecraft/spacecraft.prop --stacktrace --argmetrics spacecraft/spacecraft.json;;
+#1) java -jar theta-xsts-cli-2.15.0-all.jar --domain EXPL --initprec CTRL --maxenum 250 --cex benchmark/correct.cex --model benchmark/correct.xsts --property benchmark/correct.prop --stacktrace --argmetrics benchmark.correct.json;;
+#2) java -jar theta-xsts-cli-2.15.0-all.jar --domain EXPL --initprec CTRL --maxenum 250 --cex vaganyut/vaganyut.cex --model vaganyut/vaganyut.xsts --property vaganyut/vaganyut.prop --stacktrace --argmetrics vaganyut.json;;

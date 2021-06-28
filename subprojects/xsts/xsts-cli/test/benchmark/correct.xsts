@@ -1,0 +1,262 @@
+type Main_GroundStation : { __Inactive__, Idle, Operation }
+type DataReception_GroundStation : { __Inactive__, Start, Receiving }
+type MainRegion_Spacecraft : { __Inactive__, Main }
+type BatteryRegion_Spacecraft : { __Inactive__, Recharging, NotRecharging }
+type OperationRegion_Spacecraft : { __Inactive__, Idle, Transmitting }
+type TransmissionRegion_Spacecraft : { __Inactive__, Sending }
+type PowerConsumptionRegion_Spacecraft : { __Inactive__, Discharging }
+var Data_Data_In_System_station : boolean = false
+var ExtControl_Start_In_System_station : boolean = false
+var Status_ReceivedPackets_Out_System_station : boolean = false
+var Status_ReceivedPackets_Out_number_System_station : integer = 0
+var ExtControl_Stop_In_System_station : boolean = false
+ctrl var main_System_station : Main_GroundStation = __Inactive__
+ctrl var dataReception_System_station : DataReception_GroundStation = __Inactive__
+var forwardingEnabled_System_station : boolean = false
+var packets_System_station : integer = 0
+var Control_Start_In_System_spacecraft : boolean = false
+var Control_Stop_In_System_spacecraft : boolean = false
+ctrl var mainRegion_System_spacecraft : MainRegion_Spacecraft = __Inactive__
+ctrl var batteryRegion_System_spacecraft : BatteryRegion_Spacecraft = __Inactive__
+ctrl var operationRegion_System_spacecraft : OperationRegion_Spacecraft = __Inactive__
+ctrl var transmissionRegion_System_spacecraft : TransmissionRegion_Spacecraft = __Inactive__
+ctrl var powerConsumptionRegion_System_spacecraft : PowerConsumptionRegion_Spacecraft = __Inactive__
+var battery_System_spacecraft : integer = 0
+var data_System_spacecraft : integer = 0
+var recharging_System_spacecraft : boolean = false
+ctrl var SendingTimeout1_System_spacecraft : integer = 0
+ctrl var DischargingTimeout2_System_spacecraft : integer = 0
+ctrl var RechargingTimeout0_System_spacecraft : integer = 0
+
+trans {
+	SendingTimeout1_System_spacecraft := (if (SendingTimeout1_System_spacecraft < 2) then (SendingTimeout1_System_spacecraft + 1) else SendingTimeout1_System_spacecraft);
+	DischargingTimeout2_System_spacecraft := (if (DischargingTimeout2_System_spacecraft < 2) then (DischargingTimeout2_System_spacecraft + 1) else DischargingTimeout2_System_spacecraft);
+	RechargingTimeout0_System_spacecraft := (if (RechargingTimeout0_System_spacecraft < 5) then (RechargingTimeout0_System_spacecraft + 1) else RechargingTimeout0_System_spacecraft);
+	local var _Status_ReceivedPackets_Out_number_System_station_ : integer = Status_ReceivedPackets_Out_number_System_station;
+	local var _Control_Start_In_System_spacecraft_ : boolean = Control_Start_In_System_spacecraft;
+	local var _Status_ReceivedPackets_Out_System_station_ : boolean = Status_ReceivedPackets_Out_System_station;
+	local var _Control_Stop_In_System_spacecraft_ : boolean = Control_Stop_In_System_spacecraft;
+	local var _Data_Data_In_System_station_ : boolean = Data_Data_In_System_station;
+	_Status_ReceivedPackets_Out_System_station_ := false;
+	_Status_ReceivedPackets_Out_number_System_station_ := 0;
+	_Control_Stop_In_System_spacecraft_ := false;
+	_Control_Start_In_System_spacecraft_ := false;
+	choice {
+		assume ((((main_System_station == Operation) && (dataReception_System_station == Receiving)) && ((false == true) || (Data_Data_In_System_station == true))));
+		dataReception_System_station := Receiving;
+		local var gen0179043296 : integer = (packets_System_station + 1);
+		packets_System_station := gen0179043296;
+		choice {
+			assume forwardingEnabled_System_station;
+			local var gen1408362950 : integer = packets_System_station;
+			_Status_ReceivedPackets_Out_number_System_station_ := gen1408362950;
+			_Status_ReceivedPackets_Out_System_station_ := true;
+		} or {
+			assume (!(forwardingEnabled_System_station));
+		} or {
+			assume (!((forwardingEnabled_System_station || (!(forwardingEnabled_System_station)))));
+		}
+	} or {
+		assume ((((main_System_station == Operation) && (dataReception_System_station == Start)) && ((false == true) || (Data_Data_In_System_station == true))));
+		dataReception_System_station := Receiving;
+		local var gen0179043296 : integer = (packets_System_station + 1);
+		packets_System_station := gen0179043296;
+		choice {
+			assume forwardingEnabled_System_station;
+			local var gen1408362950 : integer = packets_System_station;
+			_Status_ReceivedPackets_Out_number_System_station_ := gen1408362950;
+			_Status_ReceivedPackets_Out_System_station_ := true;
+		} or {
+			assume (!(forwardingEnabled_System_station));
+		} or {
+			assume (!((forwardingEnabled_System_station || (!(forwardingEnabled_System_station)))));
+		}
+	} or {
+		assume (((!((((main_System_station == Operation) && (dataReception_System_station == Start)) && ((false == true) || (Data_Data_In_System_station == true))))) && (!((((main_System_station == Operation) && (dataReception_System_station == Receiving)) && ((false == true) || (Data_Data_In_System_station == true)))))) && ((main_System_station == Operation) && ((false == true) || (ExtControl_Stop_In_System_station == true))));
+		dataReception_System_station := __Inactive__;
+		_Control_Stop_In_System_spacecraft_ := true;
+		main_System_station := Idle;
+	} or {
+		assume (((main_System_station == Idle) && ((false == true) || (ExtControl_Start_In_System_station == true))));
+		main_System_station := Operation;
+		dataReception_System_station := Start;
+		_Control_Start_In_System_spacecraft_ := true;
+	} or {
+		assume (!((((((main_System_station == Operation) && (dataReception_System_station == Receiving)) && ((false == true) || (Data_Data_In_System_station == true)))) || ((((main_System_station == Operation) && (dataReception_System_station == Start)) && ((false == true) || (Data_Data_In_System_station == true)))) || (((!((((main_System_station == Operation) && (dataReception_System_station == Start)) && ((false == true) || (Data_Data_In_System_station == true))))) && (!((((main_System_station == Operation) && (dataReception_System_station == Receiving)) && ((false == true) || (Data_Data_In_System_station == true)))))) && ((main_System_station == Operation) && ((false == true) || (ExtControl_Stop_In_System_station == true)))) || (((main_System_station == Idle) && ((false == true) || (ExtControl_Start_In_System_station == true)))))));
+	}
+	_Data_Data_In_System_station_ := false;
+	choice {
+		assume ((((((mainRegion_System_spacecraft == Main) && (batteryRegion_System_spacecraft == Recharging)) && (5 <= RechargingTimeout0_System_spacecraft))) || ((((mainRegion_System_spacecraft == Main) && (batteryRegion_System_spacecraft == NotRecharging)) && (true && (battery_System_spacecraft < 80))))) || ((((((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (powerConsumptionRegion_System_spacecraft == Discharging)) && (2 <= DischargingTimeout2_System_spacecraft)))) || ((((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (transmissionRegion_System_spacecraft == Sending)) && (2 <= SendingTimeout1_System_spacecraft))))) || ((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Idle)) && (((Control_Start_In_System_spacecraft == true) || (false == true)) && ((!(recharging_System_spacecraft)) && (data_System_spacecraft > 0))))) || (((!(((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (powerConsumptionRegion_System_spacecraft == Discharging)) && (2 <= DischargingTimeout2_System_spacecraft)))) && (!(((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (transmissionRegion_System_spacecraft == Sending)) && (2 <= SendingTimeout1_System_spacecraft))))) && (((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && ((Control_Stop_In_System_spacecraft == true) || (false == true))))));
+		choice {
+			assume ((((mainRegion_System_spacecraft == Main) && (batteryRegion_System_spacecraft == Recharging)) && (5 <= RechargingTimeout0_System_spacecraft)));
+			batteryRegion_System_spacecraft := __Inactive__;
+			battery_System_spacecraft := (battery_System_spacecraft + 1);
+			choice {
+				assume (battery_System_spacecraft >= 100);
+				batteryRegion_System_spacecraft := NotRecharging;
+				recharging_System_spacecraft := false;
+			} or {
+				assume (battery_System_spacecraft < 100);
+				batteryRegion_System_spacecraft := Recharging;
+				RechargingTimeout0_System_spacecraft := 0;
+				recharging_System_spacecraft := true;
+			}
+		} or {
+			assume ((((mainRegion_System_spacecraft == Main) && (batteryRegion_System_spacecraft == NotRecharging)) && (true && (battery_System_spacecraft < 80))));
+			batteryRegion_System_spacecraft := Recharging;
+			RechargingTimeout0_System_spacecraft := 0;
+			recharging_System_spacecraft := true;
+		} or {
+			assume (!((((((mainRegion_System_spacecraft == Main) && (batteryRegion_System_spacecraft == Recharging)) && (5 <= RechargingTimeout0_System_spacecraft))) || ((((mainRegion_System_spacecraft == Main) && (batteryRegion_System_spacecraft == NotRecharging)) && (true && (battery_System_spacecraft < 80)))))));
+		}
+		choice {
+			assume (((((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (powerConsumptionRegion_System_spacecraft == Discharging)) && (2 <= DischargingTimeout2_System_spacecraft)))) || ((((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (transmissionRegion_System_spacecraft == Sending)) && (2 <= SendingTimeout1_System_spacecraft)))));
+			choice {
+				assume (((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (powerConsumptionRegion_System_spacecraft == Discharging)) && (2 <= DischargingTimeout2_System_spacecraft)));
+				powerConsumptionRegion_System_spacecraft := __Inactive__;
+				battery_System_spacecraft := (battery_System_spacecraft - 1);
+				choice {
+					assume (battery_System_spacecraft >= 80);
+					powerConsumptionRegion_System_spacecraft := Discharging;
+					DischargingTimeout2_System_spacecraft := 0;
+				} or {
+					assume (battery_System_spacecraft < 80);
+					transmissionRegion_System_spacecraft := __Inactive__;
+					batteryRegion_System_spacecraft := NotRecharging;
+					operationRegion_System_spacecraft := Idle;
+					mainRegion_System_spacecraft := Main;
+					RechargingTimeout0_System_spacecraft := 0;
+					recharging_System_spacecraft := false;
+				}
+			} or {
+				assume (!(((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (powerConsumptionRegion_System_spacecraft == Discharging)) && (2 <= DischargingTimeout2_System_spacecraft))));
+			}
+			choice {
+				assume (((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (transmissionRegion_System_spacecraft == Sending)) && (2 <= SendingTimeout1_System_spacecraft)));
+				transmissionRegion_System_spacecraft := __Inactive__;
+				data_System_spacecraft := (data_System_spacecraft - 1);
+				_Data_Data_In_System_station_ := true;
+				choice {
+					assume (data_System_spacecraft < 1);
+					powerConsumptionRegion_System_spacecraft := __Inactive__;
+					batteryRegion_System_spacecraft := NotRecharging;
+					operationRegion_System_spacecraft := Idle;
+					mainRegion_System_spacecraft := Main;
+					RechargingTimeout0_System_spacecraft := 0;
+					recharging_System_spacecraft := false;
+				} or {
+					assume (data_System_spacecraft >= 1);
+					transmissionRegion_System_spacecraft := Sending;
+					SendingTimeout1_System_spacecraft := 0;
+				}
+			} or {
+				assume (!(((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (transmissionRegion_System_spacecraft == Sending)) && (2 <= SendingTimeout1_System_spacecraft))));
+			}
+		} or {
+			assume ((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Idle)) && (((Control_Start_In_System_spacecraft == true) || (false == true)) && ((!(recharging_System_spacecraft)) && (data_System_spacecraft > 0)))));
+			operationRegion_System_spacecraft := Transmitting;
+			powerConsumptionRegion_System_spacecraft := Discharging;
+			transmissionRegion_System_spacecraft := Sending;
+			DischargingTimeout2_System_spacecraft := 0;
+			SendingTimeout1_System_spacecraft := 0;
+		} or {
+			assume (((!(((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (powerConsumptionRegion_System_spacecraft == Discharging)) && (2 <= DischargingTimeout2_System_spacecraft)))) && (!(((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (transmissionRegion_System_spacecraft == Sending)) && (2 <= SendingTimeout1_System_spacecraft))))) && (((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && ((Control_Stop_In_System_spacecraft == true) || (false == true))));
+			powerConsumptionRegion_System_spacecraft := __Inactive__;
+			transmissionRegion_System_spacecraft := __Inactive__;
+			operationRegion_System_spacecraft := Idle;
+		} or {
+			assume (!(((((((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (powerConsumptionRegion_System_spacecraft == Discharging)) && (2 <= DischargingTimeout2_System_spacecraft)))) || ((((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (transmissionRegion_System_spacecraft == Sending)) && (2 <= SendingTimeout1_System_spacecraft))))) || ((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Idle)) && (((Control_Start_In_System_spacecraft == true) || (false == true)) && ((!(recharging_System_spacecraft)) && (data_System_spacecraft > 0))))) || (((!(((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (powerConsumptionRegion_System_spacecraft == Discharging)) && (2 <= DischargingTimeout2_System_spacecraft)))) && (!(((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (transmissionRegion_System_spacecraft == Sending)) && (2 <= SendingTimeout1_System_spacecraft))))) && (((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && ((Control_Stop_In_System_spacecraft == true) || (false == true)))))));
+		}
+	} or {
+		assume (!(((((((mainRegion_System_spacecraft == Main) && (batteryRegion_System_spacecraft == Recharging)) && (5 <= RechargingTimeout0_System_spacecraft))) || ((((mainRegion_System_spacecraft == Main) && (batteryRegion_System_spacecraft == NotRecharging)) && (true && (battery_System_spacecraft < 80))))) || ((((((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (powerConsumptionRegion_System_spacecraft == Discharging)) && (2 <= DischargingTimeout2_System_spacecraft)))) || ((((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (transmissionRegion_System_spacecraft == Sending)) && (2 <= SendingTimeout1_System_spacecraft))))) || ((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Idle)) && (((Control_Start_In_System_spacecraft == true) || (false == true)) && ((!(recharging_System_spacecraft)) && (data_System_spacecraft > 0))))) || (((!(((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (powerConsumptionRegion_System_spacecraft == Discharging)) && (2 <= DischargingTimeout2_System_spacecraft)))) && (!(((((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && (transmissionRegion_System_spacecraft == Sending)) && (2 <= SendingTimeout1_System_spacecraft))))) && (((mainRegion_System_spacecraft == Main) && (operationRegion_System_spacecraft == Transmitting)) && ((Control_Stop_In_System_spacecraft == true) || (false == true))))))));
+	}
+	Status_ReceivedPackets_Out_number_System_station := _Status_ReceivedPackets_Out_number_System_station_;
+	Control_Start_In_System_spacecraft := _Control_Start_In_System_spacecraft_;
+	Status_ReceivedPackets_Out_System_station := _Status_ReceivedPackets_Out_System_station_;
+	Control_Stop_In_System_spacecraft := _Control_Stop_In_System_spacecraft_;
+	Data_Data_In_System_station := _Data_Data_In_System_station_;
+	ExtControl_Start_In_System_station := false;
+	ExtControl_Stop_In_System_station := false;
+}
+init {
+	packets_System_station := 0;
+	forwardingEnabled_System_station := true;
+	main_System_station := __Inactive__;
+	dataReception_System_station := __Inactive__;
+	ExtControl_Start_In_System_station := false;
+	ExtControl_Stop_In_System_station := false;
+	Status_ReceivedPackets_Out_System_station := false;
+	data_System_spacecraft := 100;
+	battery_System_spacecraft := 100;
+	recharging_System_spacecraft := false;
+	RechargingTimeout0_System_spacecraft := 5;
+	SendingTimeout1_System_spacecraft := 2;
+	DischargingTimeout2_System_spacecraft := 2;
+	mainRegion_System_spacecraft := __Inactive__;
+	batteryRegion_System_spacecraft := __Inactive__;
+	operationRegion_System_spacecraft := __Inactive__;
+	transmissionRegion_System_spacecraft := __Inactive__;
+	powerConsumptionRegion_System_spacecraft := __Inactive__;
+	Control_Start_In_System_spacecraft := false;
+	Control_Stop_In_System_spacecraft := false;
+	Data_Data_In_System_station := false;
+	main_System_station := Idle;
+	mainRegion_System_spacecraft := Main;
+	batteryRegion_System_spacecraft := NotRecharging;
+	operationRegion_System_spacecraft := Idle;
+	choice {
+		assume (main_System_station == Idle);
+	} or {
+		assume (main_System_station == Operation);
+		choice {
+			assume (dataReception_System_station == Start);
+			Control_Start_In_System_spacecraft := true;
+		} or {
+			assume (dataReception_System_station == Receiving);
+			local var gen0179043296 : integer = (packets_System_station + 1);
+			packets_System_station := gen0179043296;
+			choice {
+				assume forwardingEnabled_System_station;
+				local var gen1408362950 : integer = packets_System_station;
+				Status_ReceivedPackets_Out_number_System_station := gen1408362950;
+				Status_ReceivedPackets_Out_System_station := true;
+			} or {
+				assume (!(forwardingEnabled_System_station));
+			} or {
+				assume (!((forwardingEnabled_System_station || (!(forwardingEnabled_System_station)))));
+			}
+		}
+	}
+	choice {
+		assume (batteryRegion_System_spacecraft == Recharging);
+		RechargingTimeout0_System_spacecraft := 0;
+		recharging_System_spacecraft := true;
+	} or {
+		assume (batteryRegion_System_spacecraft == NotRecharging);
+		recharging_System_spacecraft := false;
+	}
+	choice {
+		assume (operationRegion_System_spacecraft == Idle);
+	} or {
+		assume (operationRegion_System_spacecraft == Transmitting);
+		DischargingTimeout2_System_spacecraft := 0;
+		SendingTimeout1_System_spacecraft := 0;
+	}
+}
+env {
+	ExtControl_Stop_In_System_station := false;
+	ExtControl_Start_In_System_station := false;
+	choice {
+		assume ((!(ExtControl_Start_In_System_station)));
+		ExtControl_Stop_In_System_station := true;
+	} or {
+		assume true;
+	}
+	choice {
+		assume ((!(ExtControl_Stop_In_System_station)));
+		ExtControl_Start_In_System_station := true;
+	} or {
+		assume true;
+	}
+	Status_ReceivedPackets_Out_System_station := false;
+}

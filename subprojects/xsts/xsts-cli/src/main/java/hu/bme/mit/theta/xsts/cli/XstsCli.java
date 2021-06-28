@@ -98,7 +98,8 @@ public class XstsCli {
 	boolean metrics = false;
 
 	@Parameter(names = "--argmetrics", description = "Export metrics from the abstract reachability graph")
-	boolean argMetrics = false;
+	//boolean argMetrics = false;
+	String argMetricsfile = null;
 
 	@Parameter(names = "--stacktrace", description = "Print full stack trace in case of exception")
 	boolean stacktrace = false;
@@ -159,8 +160,8 @@ public class XstsCli {
 				writeCex(status.asUnsafe(), xsts);
 			}
 
-			if (argMetrics) {
-				XstsArgMetrics xstsArgMetrics = new XstsArgMetrics(status.getArg(), xsts);
+			if (argMetricsfile != null) {
+				XstsArgMetrics xstsArgMetrics = new XstsArgMetrics(status.getArg(), xsts, argMetricsfile);
 				xstsArgMetrics.getMetrics();
 			}
 
